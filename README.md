@@ -31,3 +31,12 @@ if conditions1 or condition2:
     if 1 or 2 is true, this happens.
 else:
     If 0 are true, this happens
+
+## 2021-08-26
+
+Push: laddar upp det som man har på datorn.
+Pull: hämtar hem det som finns på huben, t.ex. om man jobbat hemifrån på en annan dator...
+
+random as rnd
+rnd.seed() för att välja seed
+rnd.randint(x,y) slumpat heltal mellan x och y.
