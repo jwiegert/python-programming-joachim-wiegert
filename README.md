@@ -52,3 +52,6 @@ x,y,z = 1,2,3
 While statements, när man inte vet hur många loopar som behövs.
 
 pipenv: en pip-environment
+Skapa ett speciellt shell för ett speciellt projekt:
+$ pipenv shell
+I den katalog där projektet är. Det skapar en pipfile och en pipfile.lock, dessa innehåller info om vad som gäller för detta environment. Vilken pythonversion och vilka paket.
