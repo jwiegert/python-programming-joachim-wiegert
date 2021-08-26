@@ -50,3 +50,5 @@ x,y,z = 1,2,3
 - x=1, y=2, z=3
 
 While statements, när man inte vet hur många loopar som behövs.
+
+pipenv: en pip-environment
