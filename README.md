@@ -40,3 +40,13 @@ Pull: hämtar hem det som finns på huben, t.ex. om man jobbat hemifrån på en 
 random as rnd
 rnd.seed() för att välja seed
 rnd.randint(x,y) slumpat heltal mellan x och y.
+
+Assignment operators:
+n += 1 : n = n+1
+x /= 2 : x = x/2
+
+Skapa flera variabler:
+x,y,z = 1,2,3
+- x=1, y=2, z=3
+
+While statements, när man inte vet hur många loopar som behövs.
