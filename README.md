@@ -55,3 +55,18 @@ pipenv: en pip-environment
 Skapa ett speciellt shell för ett speciellt projekt:
 $ pipenv shell
 I den katalog där projektet är. Det skapar en pipfile och en pipfile.lock, dessa innehåller info om vad som gäller för detta environment. Vilken pythonversion och vilka paket.
+
+## 2021-08-31
+
+Om for-loops.
+
+- "for each" loop, loopar igenom varje element i en lista.
+- I en del andra språk kan det vara t.ex.
+    for (int = 0; i<=10; i++)
+    Den börjar på noll, och adderar på i tills den når 10.
+- I python skriver man
+    for i in range(10)
+    Där range(10) är en lista med heltal från 0 till 9.
+- I range() kan man ge start, stopp, och step size. Range är INTE en lista, det är ett "range objekt".
+- range(2,15,3) kommer ge i = 2, 5, 8, 11, 14.
+
