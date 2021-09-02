@@ -70,3 +70,20 @@ Om for-loops.
 - I range() kan man ge start, stopp, och step size. Range är INTE en lista, det är ett "range objekt".
 - range(2,15,3) kommer ge i = 2, 5, 8, 11, 14.
 
+## 2021-09-02
+
+Om lists.
+
+I en lista i Python kan man lägga in nästan vad som helst, strängar, ints, floats.
+
+- a = ['a', 'hej där', 5, 5.3, '5', True]
+
+Pythonindex börjar med 0, så a går här från a[0,4]. Men len(a) = 5. a:s index här är antingen
+
+-  0  1  2  3  4
+
+eller
+
+- -5 -4 -3 -2 -1
+
+
