@@ -86,4 +86,8 @@ eller
 
 - -5 -4 -3 -2 -1
 
+List comprehenion: Svart magi för att formulera listor.
 
+- a = [x**2 for x in range(1,10)] - ger en lista med kvadraterna av 1-10. Kan också göra lista i lista så här
+
+- a = [[x**2 for _ in range(1,10)] for x in range(1,1)] ger en 10x10matris där raderna är fyllda med kvadraterna av 1-10.
