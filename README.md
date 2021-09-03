@@ -52,9 +52,29 @@ Skapa flera variabler:
 While statements, när man inte vet hur många loopar som behövs.
 
 pipenv: en pip-environment
-Skapa ett speciellt shell för ett speciellt projekt:
-$ pipenv shell
-I den katalog där projektet är. Det skapar en pipfile och en pipfile.lock, dessa innehåller info om vad som gäller för detta environment. Vilken pythonversion och vilka paket.
+Öppna ett speciellt shell för ett speciellt projekt:
+ 
+ - $ pipenv shell
+
+I den katalog där projektet är. Det skapar en pipfile och en pipfile.lock, dessa innehåller info om vad som gäller för detta environment, vilken pythonversion och vilka paket.
+
+- Exit pipenv: > exit
+
+- Gå tillbaka till pipenv: $ pipenv shell, är jag redan i katalogen med pipfile etc så återgår den till shell'et jag redan har där. Annars skapar den ett nytt där jag är.
+
+Installera paket till det pipenv jag är i är då bara att skriva
+
+- $ pipenv install PACKAGENAME
+
+så hamnar den i listan av paket i pipfile. Och tvärtom, uninstall
+
+- $ pipenv uninstall PACKAGENAME
+
+Med pipenv kan man nyttja t.ex. en "requirements.txt" som listar requirements såsom det skrivs i en pipfile. Det är bara att copypastea en sån lista till ens enviroment, och sen skriver man
+
+- $ pipenv install -r ./[LÄNKTILLREQUIREMENTS.TXT]
+
+I pipfile, under packages, står versionsnamn till höger, står det t.ex. numpy = "*" så kör den den senaste versionen.
 
 ## 2021-08-31
 
@@ -86,8 +106,10 @@ eller
 
 - -5 -4 -3 -2 -1
 
-List comprehenion: Svart magi för att formulera listor.
+List comprehenion: Svart magi för att formulera listor på en enda rad istället för med forloops.
 
 - a = [x**2 for x in range(1,10)] - ger en lista med kvadraterna av 1-10. Kan också göra lista i lista så här
 
 - a = [[x**2 for _ in range(1,10)] for x in range(1,1)] ger en 10x10matris där raderna är fyllda med kvadraterna av 1-10.
+
+if-satser får man också ha med.
