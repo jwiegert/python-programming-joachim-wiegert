@@ -113,3 +113,55 @@ List comprehenion: Svart magi för att formulera listor på en enda rad iställe
 - a = [[x**2 for _ in range(1,10)] for x in range(1,1)] ger en 10x10matris där raderna är fyllda med kvadraterna av 1-10.
 
 if-satser får man också ha med.
+
+## 2021-09-06
+
+- list comprehensions med if-sats
+
+List comprehensions ÄR aningen snabbare än forloopar. Men inte jätte, så det man ska satsa på är läsligheten i första hand. Ibland är listcomprehensions lättare att läsa, ibland inte.
+
+- strings: 
+
+En sträng är egentligen en lista med unicode tecken. SÅ en lsita med strängar är egentligen en lista där varje element är en lista till med tecken.
+
+Concaternating strings: att slå ihop strängar till en ny kombination. T.ex. "kokchun" + "giang" blir "kokchungiang". (Man kan slå in mellanslag också med + " " +)
+
+- Multiline fstring
+
+Printa strängen som flera rader
+
+f"""
+Blabla
+blabla
+yadayada
+"""
+
+Kommer printas exakt så. För loopar och annat är det dock lämpligare att använda \n för newline.
+
+FYI \b innebär backspace, dvs sudda ut det som skrivits precis innan.
+
+- Split
+
+Går att dela upp en lång sträng med ett speciellt tecken, t.ex. kommatecken eller mellanslag (default)
+
+bamba = "chili sin carne, köttbullar, fisk, pannkakor, taco".split(",")
+
+- zip
+
+Går att loopa genom två listor samtidigt
+
+for x,y in zip(xlist,ylist):
+    x är elementen i xlist
+    y är elementen i ylist
+
+- Indexering
+
+Så en sträng är en list med unicode-tecken.
+
+[]-operatorn används för att komma åt specifika element i en lista.
+
+slicing-operatorn (:) använder för att komma åt sekvenser av index.
+
+För en sträng så ger sträng[0] första tecknet. [1] andra tecknet etc. Så kan man plocka ut enstaka ord.
+
+Går att söka på strängar också med STRÄNG.find("word") - det ger index för den första bokstaven av ordet.
