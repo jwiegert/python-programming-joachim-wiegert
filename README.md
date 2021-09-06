@@ -165,3 +165,31 @@ slicing-operatorn (:) använder för att komma åt sekvenser av index.
 För en sträng så ger sträng[0] första tecknet. [1] andra tecknet etc. Så kan man plocka ut enstaka ord.
 
 Går att söka på strängar också med STRÄNG.find("word") - det ger index för den första bokstaven av ordet.
+
+- Ändra datatyp hos strängar
+
+En sträng med siffror: ['1','2','3']
+
+Går inte att ändra med int(sträng)
+
+Ett sätt är att använda listcomprehension:
+
+sträng = [float(x) for x in sträng]
+
+Men om ett av elementen INTE är en siffra då? Lägg till ifsats med STRÄNG.isdigit(), vilket ger True eller False.
+
+- Regular expressions
+
+Med vanliga strängar kan man leta efter specifika ord eller siffror. Men med regexp kan man leta efter MÖNSTER som är vnaliga för det man letar efter, t.ex. telefonnummer eller emailadresser.
+
+- Exempel, telefonnummer: 031-548652
+
+Detta har 3 siffror, bindestreck och 6 siffror: ddd-dddddd. Här är d en del av ett set: d tillhör {0,1,2,3,4,5,6,7,8,9}
+
+Behöver paketet regular expresions
+
+import re
+
+re.findall(blabla, sträng) är kortfattad syntax (se codealong).
+
+Eller googla lite efter t.ex. "find phone numbers with python regular expressions". Så kan man få list på patterns som man kan söka efter.
