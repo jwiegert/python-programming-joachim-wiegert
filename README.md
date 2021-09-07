@@ -76,9 +76,7 @@ Med pipenv kan man nyttja t.ex. en "requirements.txt" som listar requirements s�
 
 I pipfile, under packages, står versionsnamn till höger, står det t.ex. numpy = "*" så kör den den senaste versionen.
 
-## 2021-08-31
-
-Om for-loops.
+## 2021-08-31 : Om for-loops.
 
 - "for each" loop, loopar igenom varje element i en lista.
 - I en del andra språk kan det vara t.ex.
@@ -90,9 +88,7 @@ Om for-loops.
 - I range() kan man ge start, stopp, och step size. Range är INTE en lista, det är ett "range objekt".
 - range(2,15,3) kommer ge i = 2, 5, 8, 11, 14.
 
-## 2021-09-02
-
-Om lists.
+## 2021-09-02 : Om lists.
 
 I en lista i Python kan man lägga in nästan vad som helst, strängar, ints, floats.
 
@@ -114,7 +110,9 @@ List comprehenion: Svart magi för att formulera listor på en enda rad iställe
 
 if-satser får man också ha med.
 
-## 2021-09-06
+## 2021-09-06 : strings
+
+- Googla på "string methods in python" så hittas en massa kommandon man kan använda för strängar: https://www.w3schools.com/python/python_ref_string.asp
 
 - list comprehensions med if-sats
 
@@ -193,3 +191,54 @@ import re
 re.findall(blabla, sträng) är kortfattad syntax (se codealong).
 
 Eller googla lite efter t.ex. "find phone numbers with python regular expressions". Så kan man få list på patterns som man kan söka efter.
+
+# 2021-09-07 : funktioner bl.a.
+
+Samt "kod i discord" och intro till lab2.
+
+- om man vill skriva kod i discord så att det blir snyggt formaterat:
+
+```py
+KOD HÄR
+```
+
+- funktioner:
+
+Väldigt enkelt: input parametrar in, ut är "return", samma som x -> f(x).
+
+I python finns olika typer av funktioner, med och utan både input och returnvärden. Men det är ett sätt att strukturera upp sin kod. Man kan på så vis återanvända kod istället för att copy-pastea samma kodsnutt flera gånger.
+
+En funktion utan returnvärde i andra språk skulle använda sig av "void"-kommandot. Men inte i python. Det är bara att skriva på.
+
+- funktioners syntax
+
+Exempel, funktion som tar fram största av 2 tal.
+
+```py
+def biggest(num1, num2):
+    if num1 > num2:
+        return num1
+    else:
+        return num2
+
+print(biggest(3,6))
+```
+
+keywords för att starta funktioner: "def FUNKTIONSNAMN( INPUTPARAMETRAR )". "def" = "define", definiera funktionsnamnet.
+
+Sedan ett funktionsblock. Satser odyl.
+
+Sen har vi return-satser, alltså vad ska funktionen returnera?
+
+Input-parametrar till en funktion kallas för "argument".
+
+Man kan inte tvinga funktionen att bara använda en viss datatyp. Men man kan spec'a i help'en till ens funktion vad den ska ha för datatyper som input.
+
+Variablar och parametrar i en funktion är lokala! Så de existerar bara inne i funktionen. Jag kan inte åkalla variabler från en funktion
+
+- Defaultvärden går att definiera i en funktion så man måste inte ha input alltid ens.
+
+def funktionsnamn(variabal1 = x, variabel2 = y)
+
+Dessa värden går att skriva över gneom att anropa funktionen och ge egna värde. Men man kan också skriva funktionen utan inputs såhär.
+
