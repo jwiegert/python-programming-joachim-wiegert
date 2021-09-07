@@ -128,11 +128,13 @@ Concaternating strings: att slå ihop strängar till en ny kombination. T.ex. "k
 
 Printa strängen som flera rader
 
+```py
 f"""
 Blabla
 blabla
 yadayada
 """
+```
 
 Kommer printas exakt så. För loopar och annat är det dock lämpligare att använda \n för newline.
 
