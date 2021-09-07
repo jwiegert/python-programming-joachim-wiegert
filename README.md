@@ -242,3 +242,31 @@ def funktionsnamn(variabal1 = x, variabel2 = y)
 
 Dessa värden går att skriva över gneom att anropa funktionen och ge egna värde. Men man kan också skriva funktionen utan inputs såhär.
 
+- funktioner i egna filer
+
+Det går att göra! Man kan ha många funktioner i en och samma fil. Sen måste man ladda in den med pythons klassiska import (ligger i samma katalog då). T.ex.
+
+```py
+import MINAFUNKTION as FÖRKORTNING
+```
+
+- Arbitrary arguments.
+
+Om man inte vet hur många argument som ska in i funktionen kan man använda sig av arbitrary arguments: *args:
+
+```py
+def FUNKTION(*ARGUMENTNAMN):
+```
+
+Denna blir som en tuple då, den är som en lista, kan vara vilken längd som helst.
+
+- anonyma funktioner
+
+Behöver inte definieras med def. Istället använder man sig av lambda-funktionen, t.ex.
+
+```py
+cube = lambda x: x**3
+print(cube(3)) # gives 3**3 = 27.
+```
+
+Man kan ha en lambda-funktion i en funktion. Då blir syntaxen att man anropar en funktion i en funktion. (se ipynb-filen, 6_functions)
