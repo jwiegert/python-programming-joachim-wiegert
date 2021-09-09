@@ -290,3 +290,13 @@ NameError: name 'prin' is not defined
 - Man kan skriva över keywords i python. Så man kan döpa variabler till kommandon, t.ex. "print = namn" gör att print blir en variabel. Nu blir det omöjligt att köra print tills man startar om python och hittar felet. Kan bli svårt att hitta...
 
 - Man kan döpa en pythonfil till samma namn som en modul eller bibliotek. T.ex. kan man råka ha ett script som heter "math.py". "import math" importerar då DEN filen och inte math-modulen! Mycket farligt!
+
+Hur man hanterar oväntade fel.
+
+- Exempel: Motverka att användaren kan skriva in felaktigheter. En som inte är så bra på att använda datorn.
+
+Använd : "Try block", "except block", "raise".
+
+Detta till skillnad från att sätta upp en massa if-satser som försöker förutse felaktigheter, Med try: (kombinerat med except och rise) kan man både leta efter allmänna fel och specifika fel. Och man kan få koden att fortsätta förbi felet.
+
+Detta ska användas i lab2!
