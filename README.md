@@ -272,3 +272,21 @@ print(cube(3)) # gives 3**3 = 27.
 ```
 
 Man kan ha en lambda-funktion i en funktion. Då blir syntaxen att man anropar en funktion i en funktion. (se ipynb-filen, 6_functions)
+
+# 2021-09-09 : felhantering/error handling
+
+Feltyper
+
+- syntax error: syntaxfel alltså, python förstår inte koden.
+
+```py
+NameError: name 'prin' is not defined
+```
+
+- Logiska fel: svåra att hitta, koden funkar utan problem men man får oväntade resultat. Man har råkat skriva fel nånstans, t.ex. fel ekvation, missar nån kvadrat eller nåt.
+
+- Exception error: Python vet vad den ska göra men kan inte göra det. Error-meddelanden är då väldigt specifika, t.ex. "index out of range".
+
+- Man kan skriva över keywords i python. Så man kan döpa variabler till kommandon, t.ex. "print = namn" gör att print blir en variabel. Nu blir det omöjligt att köra print tills man startar om python och hittar felet. Kan bli svårt att hitta...
+
+- Man kan döpa en pythonfil till samma namn som en modul eller bibliotek. T.ex. kan man råka ha ett script som heter "math.py". "import math" importerar då DEN filen och inte math-modulen! Mycket farligt!
