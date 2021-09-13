@@ -9,19 +9,26 @@ import re
 #
 # Computes distance between points and eight figure.
 #
+
+# det computedistance(data1,data2,testdata):
 def computedistance(widthdata,heightdata,testdata):
     #
     # widthdata and heightdata are Npik long lists.
     # testdata contains 2 elements.
     #
     distance = []
+#    distance1 = []
+#    distance2 = []
+#    for w1,h1,w2,h2 in zip(data1[0],data1[1],data2[0],data2[1]):
     for width,height in zip(widthdata,heightdata):
         #
         # Compute distances between Pichu and testdata
         #
+        #distance1.append(((w1-testdata[0])**2 + (h1-testdata[1])**2)**0.5)
+        #distance2.append(((w2-testdata[0])**2 + (h2-testdata[1])**2)**0.5)
         distance.append((\
             (width-testdata[0])**2 + (height-testdata[1])**2)**0.5)
-    return distance
+    return distance1,distance2
 #
 # Identifies if testdata belongs to Pichu or Pikachu
 #
@@ -40,6 +47,9 @@ def identifyfigure(pichudistance,pikachudistance,testdata):
 pichufile   = open('pichu.txt'      , 'r').readlines()[1:]
 pikachufile = open('pikachu.txt'    , 'r').readlines()[1:]
 testfile    = open('test_points.txt', 'r').readlines()
+
+# You forgot to close the files!!
+
 #
 # Extract data from strings (and remove parentheses)
 #
@@ -57,10 +67,8 @@ Npik          = len(pichuwidth) # Both have the same number of points...
 #
 # testdata-syntax: [[width,height],[width,height], ...
 #
-testfile = re.findall(r"\d",testfile[0])
-testdata = [\
-    [int(testfile[n]+testfile[n+1]) for n in range(nn, 3+nn) if n%2==0]\
-        for nn in range(len(testfile)-3) if nn%4==0]
+testfile = re.findall(r"\d\d",testfile[0])
+testdata = [[int(testfile[n]),int(testfile[n+1])] for n in range(len(testfile)) if n%2==0]
 Ntest    = len(testdata)
 #
 # 2. plot all points
@@ -78,8 +86,8 @@ plt.legend()
 #    check if testpoint is closest to pickachu or pichu
 #
 for testpoint in testdata:
-    pichudistance   = computedistance(pichuwidth,pichuheight,testpoint)
-    pikachudistance = computedistance(pikachuwidth,pikachuheight,testpoint)
+    pichudistance,pikachudistance = computedistance([pichuwidth,pichuheight],[pikachuewidth,pikachuheight],testpoint)
+#    pikachudistance = computedistance(pikachuwidth,pikachuheight,testpoint)
     #
     # 5. Print out which points are which.
     #

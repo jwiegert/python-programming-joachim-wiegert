@@ -300,3 +300,65 @@ Använd : "Try block", "except block", "raise".
 Detta till skillnad från att sätta upp en massa if-satser som försöker förutse felaktigheter, Med try: (kombinerat med except och rise) kan man både leta efter allmänna fel och specifika fel. Och man kan få koden att fortsätta förbi felet.
 
 Detta ska användas i lab2!
+
+# 2021-09-13 Filhantering
+
+(Dagens föreläsning använder filerna i Code-Along/files/)
+
+Använd inte bara
+
+> f = open( .... )
+
+använd
+
+> with open( .... ) as f
+
+Det sköter felhantering och stänger automatisk filen sen. Apropå path-hantering, open() här är en relativ path men kan också vara en absolut path. 
+
+(Jag bör testa att skriva
+> '../../blabla/hej/etc' 
+Funkar det att backa så att säga? LÄgga till r''?)
+
+Olika options till open()
+
+- 'r' = read
+- 'w' = write
+- 'a' = append (add to existing files)
+- 'x' = create file (gives error if file already exists, so that you don't accidently overwrite a file)
+
+Olika sätt att printa ut filen sen:
+
+> print(text)
+
+Ger hur textfilen ser ut
+
+> print(repr(text))
+
+Ger hur textfilen ser ut för python, så här finns \n och annan kod inlagd. Sånt vi vill rensa, så vi behöver inspektera detta innan dåju.
+
+> file.read()
+
+Ger en enda lång sträng av filen
+
+> file.readlines()
+
+Ger en lista där varje rad är ett element i listan (och varje element i listan är en sträng)
+
+## Strategi för att rensa t.ex. quotes.txt
+
+- Inspektera filen
+
+- Ta bort blanksteg och \n för och efter textremsor
+
+- Ta bort onödiga blanksteg mellan ord
+
+- Lägg till siffror till citaten
+
+- Extrahera och lista författare/upphovsmakarna.
+
+
+
+
+
+
+
