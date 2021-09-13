@@ -356,8 +356,15 @@ Ger en lista där varje rad är ett element i listan (och varje element i listan
 
 - Extrahera och lista författare/upphovsmakarna.
 
+Användbart:
 
+> set
 
+tar ut de unika elementen av en lista
+
+```py
+set([4,4,4,1,1,1,2,3,4]) == [4,1,2,3]
+```
 
 
 
