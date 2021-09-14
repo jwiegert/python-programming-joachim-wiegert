@@ -137,7 +137,7 @@ for testpoint in testdata:
 # 6. Let the use input a test point. Is this part of Pickachu or Pichu?
 #
 # Ask and test input data (default values are 1.0 and 1.0 here)
-userwidth,userheight = askforvalue(1.0,1.0)
+userwidth,userheight = askforvalue(22,35)
 # Compute distance
 pichudistance,pikachudistance = \
         computedistance([pichuwidth,pichuheight],[pikachuwidth,pikachuheight],[userwidth,userheight])
@@ -154,10 +154,29 @@ plt.legend()
 #    Take 5 points that are closest to the test point and the class the majority of these belong to
 #    decide which figure the test point belongs to.
 #
-# create a dictionary whih lists distance and class, sort it and check the five shortest,
+# create a list with distance and class, sort it and check the five shortest,
 # check which is majority, done.
-figuredistances = {'pichu':pichudist for pichudist in pichudistance}
-print(figuredistances)
-
+#
+# Create a list with both distances and class
+#
+figuredistances = []
+for pichudist in pichudistance:
+    figuredistances.append(f"{pichudist}:pichu")
+for pikachudist in pikachudistance:
+    figuredistances.append(f"{pikachudist}:pikachu")
+# Sort list
+figuredistances.sort()
+# Check 5 first elements
+pichucounter = 0
+pikachucounter = 0
+for nn in range(5):
+    if figuredistances[nn].split(":")[1] == 'pichu':
+        pichucounter += 1
+    if figuredistances[nn].split(":")[1] == 'pikachu':
+        pikachucounter += 1
+if pichucounter > pikachucounter:
+    print("It's Pichu!")
+else:
+    print("It's Pikachu!")
 
 
