@@ -7,32 +7,34 @@ import re
 #
 # Define functions here ------------------------------------------------------------
 #
-# Computes distance between points and eight figure.
+# Computes distance between points and figure.
 #
-
-# det computedistance(data1,data2,testdata):
-def computedistance(widthdata,heightdata,testdata):
+def computedistance(data1,data2,testdata):
     #
-    # widthdata and heightdata are Npik long lists.
-    # testdata contains 2 elements.
+    # This function computes distance between data1/data2 and testdata.
+    # Output are distance1 and distance2.
     #
-    distance = []
-#    distance1 = []
-#    distance2 = []
-#    for w1,h1,w2,h2 in zip(data1[0],data1[1],data2[0],data2[1]):
-    for width,height in zip(widthdata,heightdata):
+    # data1 and data2 are 2*Npik long lists.
+    # data1[0] are width-data
+    # data1[1] are height-data (same for data2)
+    # testdata contains 2 elements, [width,height]
+    #
+    distance1 = []
+    distance2 = []
+    for w1,h1,w2,h2 in zip(data1[0],data1[1],data2[0],data2[1]):
         #
         # Compute distances between Pichu and testdata
         #
-        #distance1.append(((w1-testdata[0])**2 + (h1-testdata[1])**2)**0.5)
-        #distance2.append(((w2-testdata[0])**2 + (h2-testdata[1])**2)**0.5)
-        distance.append((\
-            (width-testdata[0])**2 + (height-testdata[1])**2)**0.5)
+        distance1.append(((w1-testdata[0])**2 + (h1-testdata[1])**2)**0.5)
+        distance2.append(((w2-testdata[0])**2 + (h2-testdata[1])**2)**0.5)
     return distance1,distance2
 #
 # Identifies if testdata belongs to Pichu or Pikachu
 #
 def identifyfigure(pichudistance,pikachudistance,testdata):
+    #
+    # This function checks if testdata belongs to Pichu or Pikachu
+    #
     if min(pichudistance) > min(pikachudistance):
         # Pikachu!!
         print(f"Sample with (width,heigh) = {testdata} is classified as Pikachu")
@@ -44,6 +46,10 @@ def identifyfigure(pichudistance,pikachudistance,testdata):
 #
 # 1. Load data
 #
+
+# load with with!
+#with open(exercpath+outfile, 'w') as f:
+
 pichufile   = open('pichu.txt'      , 'r').readlines()[1:]
 pikachufile = open('pikachu.txt'    , 'r').readlines()[1:]
 testfile    = open('test_points.txt', 'r').readlines()
@@ -86,8 +92,8 @@ plt.legend()
 #    check if testpoint is closest to pickachu or pichu
 #
 for testpoint in testdata:
-    pichudistance,pikachudistance = computedistance([pichuwidth,pichuheight],[pikachuewidth,pikachuheight],testpoint)
-#    pikachudistance = computedistance(pikachuwidth,pikachuheight,testpoint)
+    pichudistance,pikachudistance = \
+        computedistance([pichuwidth,pichuheight],[pikachuwidth,pikachuheight],testpoint)
     #
     # 5. Print out which points are which.
     #

@@ -366,6 +366,8 @@ tar ut de unika elementen av en lista
 set([4,4,4,1,1,1,2,3,4]) == [4,1,2,3]
 ```
 
+# 2021-09-14 Dictionary
+
 
 
 
