@@ -368,6 +368,14 @@ set([4,4,4,1,1,1,2,3,4]) == [4,1,2,3]
 
 # 2021-09-14 Dictionary
 
+Verktyg för att organisera data. Består av "key:value pair". Man har någon nyckel och får ut något värde. Baseras på datastrukturer och går väldigt snabbt att använda (prestanda: O(1)). Man sätter alltså upp en uppsättning key-words och assign'ar data till dem, listor, strängar etc, vad man vill. Går att anropa sen:
+
+> dictionaryname['dictionarykeyword']
+
+returnerar vad som finns i dictionary under det keyword.
+
+
+
 
 
 
