@@ -344,7 +344,7 @@ Ger en enda lång sträng av filen
 
 Ger en lista där varje rad är ett element i listan (och varje element i listan är en sträng)
 
-## Strategi för att rensa t.ex. quotes.txt
+### Strategi för att rensa t.ex. quotes.txt
 
 - Inspektera filen
 
@@ -374,8 +374,21 @@ Verktyg för att organisera data. Består av "key:value pair". Man har någon ny
 
 returnerar vad som finns i dictionary under det keyword.
 
+### Dictionary comprehension
 
+Ungefär som list comprehension, fast med dictionary istället. Skrivs ungefär likadant, exempel:
 
+> gradecount = {key: 0 for key in gradelimits}
+
+"key" är keyword som plockas från gradelimits här. 0 är en placeholder med antal personer med visst poäng i det här fallet. Den anopas och ändras lätt med t.ex.
+
+> gradecount[grade] = 10
+
+där grade är ett keyword, i det här fallet ett betyg som exempel
+
+> gradecount['F'] = 10
+
+är 10st har F. {'F': 10}.
 
 
 
