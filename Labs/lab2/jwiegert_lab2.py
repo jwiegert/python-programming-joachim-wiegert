@@ -1,9 +1,12 @@
 # Laboration 2, Pikachu or Pichu?
+# Identify if sample data belong to Pikachu or Pichu with the help of example data.
 #
 # Import packages
 #
 import matplotlib.pyplot as plt
+import random as rnd
 import re
+import os
 #
 # Define functions here ------------------------------------------------------------
 # Computes distance between points and figure --------------------------------------
@@ -29,6 +32,7 @@ def computedistance(data1,data2,testdata):
     return distance1,distance2
 #
 # Identifies if testdata belongs to Pichu or Pikachu ------------------------------
+# (Yes, this is hardcoded to check for Pikachu or Pichu...)
 #
 def identifyfigure(pichudistance,pikachudistance,testdata):
     #
@@ -40,6 +44,33 @@ def identifyfigure(pichudistance,pikachudistance,testdata):
     else:
         # Pichu!!
         print(f"Sample with (width,heigh) = {testdata} is classified as Pichu")
+#
+# Function that uses the 5-nearest-method (problem2) ------------------------
+# (Yes, this is also hardcoded to check for Pikachu or Pichu...)
+#
+def identifyfivenearest(pichudistance,pikachudistance):
+    # First we list all distances and corresponding figure names
+    # (Could only get this to work with forloops, not with listcomprehension)
+    figuredistances = []
+    for pichudist in pichudistance:
+        figuredistances.append(f"{pichudist}:pichu")
+    for pikachudist in pikachudistance:
+        figuredistances.append(f"{pikachudist}:pikachu")
+    # Sort list (by distance)
+    figuredistances.sort()
+    # Check 5 first elements and count number of Pichu/Pikachu
+    pichucounter = 0
+    pikachucounter = 0
+    for nn in range(5):
+        if figuredistances[nn].split(":")[1] == 'pichu':
+            pichucounter += 1
+        if figuredistances[nn].split(":")[1] == 'pikachu':
+            pikachucounter += 1
+    # Identify who is who!
+    if pichucounter > pikachucounter:
+        print("It's Pichu! (Using five nearest-method)")
+    else:
+        print("It's Pikachu! (Using five nearest-method)")
 #
 # Define function that tests the input from the user -------------------------------
 #
@@ -72,6 +103,7 @@ def askforvalue(defwidth,defheight):
     # Return width and height values.
     #
     return width,height
+
 #
 # Start of program ----------------------------------------------------------
 #
@@ -154,29 +186,40 @@ plt.legend()
 #    Take 5 points that are closest to the test point and the class the majority of these belong to
 #    decide which figure the test point belongs to.
 #
-# create a list with distance and class, sort it and check the five shortest,
-# check which is majority, done.
+# Check the previous user input again.
 #
-# Create a list with both distances and class
+print("\nAgain with Five-nearest-method and your input sample:")
+identifyfivenearest(pichudistance,pikachudistance)
 #
-figuredistances = []
-for pichudist in pichudistance:
-    figuredistances.append(f"{pichudist}:pichu")
-for pikachudist in pikachudistance:
-    figuredistances.append(f"{pikachudist}:pikachu")
-# Sort list
-figuredistances.sort()
-# Check 5 first elements
-pichucounter = 0
-pikachucounter = 0
-for nn in range(5):
-    if figuredistances[nn].split(":")[1] == 'pichu':
-        pichucounter += 1
-    if figuredistances[nn].split(":")[1] == 'pikachu':
-        pikachucounter += 1
-if pichucounter > pikachucounter:
-    print("It's Pichu!")
-else:
-    print("It's Pikachu!")
+# Bonus problems -----------------------------------------------------------------
+#
+input("\nWe now start with the bonus problems. Press Enter to continue...")
+
+#
+# 1. seperate original data randomly to two sets.
+#    a) 90 trainingdata, 45 are pikachu, 45 are pichu
+#    b) 10 are testdata (5 pikachu and 5 are pichu)
+#
+
+# I should combine and randomize these 4 lists.
+# I could use strings or a dict, so that each line in the list says
+# 'width,height:name'
+#pichuwidth
+#pichuheight
+#
+#pikachuwidth
+#pikachuheight
+
+
+
+
+
+# Separate into two lists
+trainingdata,testdata       = [],[]
+pichucounter,pikachucounter = 0,0
+
+for data in figuredistances:
+    
+
 
 
