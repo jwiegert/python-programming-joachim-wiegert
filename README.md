@@ -390,5 +390,8 @@ där grade är ett keyword, i det här fallet ett betyg som exempel
 
 är 10st har F. {'F': 10}.
 
+# 2021-09-16
 
+Tillägnat Lab2 idag.
 
+Figur: olika färger och punkter för de olika data, plus gärna en titel och legend.
