@@ -6,7 +6,6 @@
 import matplotlib.pyplot as plt
 import random as rnd
 import re
-import os
 import sys
 #
 # Define functions here ------------------------------------------------------------
@@ -45,15 +44,12 @@ def identifyfigure(pichudistance,pikachudistance,testdata):
     # testdata and either figure's all points.
     # testdata is a list with 2 floats, [width,height]
     #
-    # Identify who it is and return a +1 for that one.
-    pichucounterout,pikachucounterout = 0,0
+    # Identify who it is and return the name as a string
     if min(pichudistance) > min(pikachudistance):
-        print(f"Sample with (width,heigh) = {testdata} is classified as Pikachu")
-        pikachucounterout += 1
+        identity = "Pikachu"
     else:
-        print(f"Sample with (width,heigh) = {testdata} is classified as Pichu")
-        pichucounterout   += 1
-    return pichucounterout,pikachucounterout
+        identity = "Pichu"
+    return identity
 #
 # Function that uses the 5-nearest-method (problem2) ------------------------
 # (Yes, this is also hardcoded to check for Pikachu or Pichu...)
@@ -81,15 +77,12 @@ def identifyfivenearest(pichudistance,pikachudistance,testdata):
             pichucounter   += 1
         if figuredistances[nn].split(":")[1] == 'pikachu':
             pikachucounter += 1
-    # Identify who is who! And return a +1 for which one it is.
-    pichucounterout,pikachucounterout = 0,0
+    # Identify who is who and return the name as a string
     if pichucounter > pikachucounter:
-        print(f"Sample with (width,heigh) = {testdata} is classified as Pichu! (Using five nearest-method)")
-        pichucounterout += 1
+        identity = "Pichu"
     else:
-        print(f"Sample with (width,heigh) = {testdata} is classified as Pikachu! (Using five nearest-method)")
-        pikachucounterout += 1
-    return pichucounterout,pikachucounterout
+        identity = "Pikachu"
+    return identity
 #
 # Define function that asks for and tests input from the user ---------------------------
 #
@@ -100,7 +93,7 @@ def askforvalue(defaultwidth,defaultheight):
     # Ask for and check width-input.
     masterrormessage = "Your input must be a postitive number with digits (use . (point) for decimals, not , (comma) - and no quotation marks. Please try again: "
     while True:
-        width = input("\nPlease write a width (with digits and point as decimal point): ") or defaultwidth
+        width = input("Please write a width (with digits and point as decimal point): ") or defaultwidth
         try:
             width = float(width)
             if width < 0:
@@ -110,7 +103,7 @@ def askforvalue(defaultwidth,defaultheight):
             print(f"Error; {err}:\n{masterrormessage}")
     # Ask for (and test) height input
     while True:
-        height = input("\nPlease write a height (with digits and point as decimal point): ") or defaultheight
+        height = input("Please write a height (with digits and point as decimal point): ") or defaultheight
         try:
             height = float(height)
             if height < 0:
@@ -119,7 +112,39 @@ def askforvalue(defaultwidth,defaultheight):
         except ValueError as err:
             print(f"Error; {err}:\n{masterrormessage}")
     # Return width and height values
+    print(f"Your input values (width,height) are ({width},{height})")
     return width,height
+#
+# Define a function that tests the two different algorithms and computes accuracy -----
+#
+def computeaccuracies(pichuwidth,pichuheight, pikachuwidth,pikachuheight, testdata):
+    # input-data: testdata or trainingdata, pichuwidth-height, pikachuwidth-height
+    Ntests          = len(testdata)
+    nearestcounter  = [0,0] # Counter for nearest-point-algorithm
+    fivenearcounter = [0,0] # Counter for five-nearest-algorithm
+    for data in testdata:
+        # 0. Extract data from testdata/trainingdata
+        testwidth    = float(data.split(":")[0].split(",")[0])
+        testheight   = float(data.split(":")[0].split(",")[1])
+        testidentity = data.split(":")[1]
+        # 1. Compute distance between testdata and original data
+        pichudistance,pikachudistance = computedistance([pichuwidth,pichuheight], [pikachuwidth,pikachuheight], [testwidth,testheight])
+        # 2. Check identity and count the number of correct answers (using nearest-point-method)
+        estimatedname = identifyfigure(pichudistance, pikachudistance, [testwidth,testheight])
+        if testidentity == estimatedname and testidentity == "Pichu":
+            nearestcounter[0] += 1
+        if testidentity == estimatedname and testidentity == "Pikachu":
+            nearestcounter[1] += 1
+        # 3. Check identity again, but with 5-nearestmethod
+        estimatedname = identifyfivenearest(pichudistance,pikachudistance, [testwidth,testheight])
+        if testidentity == estimatedname and testidentity == "Pichu":
+            fivenearcounter[0] += 1
+        if testidentity == estimatedname and testidentity == "Pikachu":
+            fivenearcounter[1] += 1
+    # 4. Compute and return accuracies
+    accuracynearest  = sum(nearestcounter )/Ntests
+    accuracyfivenear = sum(fivenearcounter)/Ntests
+    return accuracynearest,accuracyfivenear
 #
 # Start of program ----------------------------------------------------------
 #
@@ -134,6 +159,7 @@ with open('pichu.txt'      , 'r') as fpichu,\
     # No header line in testfile, extract all the line(s)
     testfile    = ftest.readlines()
 # Extract data from strings and remove parentheses
+# (perhaps more effective as forloops instead of listcomprehension)
 pichuwidth    = [float(data.split(',')[0][1:  ]) for data in pichufile]
 pichuheight   = [float(data.split(',')[1][ :-2]) for data in pichufile]
 pikachuwidth  = [float(data.split(',')[0][1:  ]) for data in pikachufile]
@@ -179,10 +205,12 @@ for testpoint in testdata:
     pichudistance,pikachudistance = \
         computedistance([pichuwidth,pichuheight],[pikachuwidth,pikachuheight],testpoint)
     # 4. Print out which points are which.
-    identifyfigure(pichudistance,pikachudistance,testpoint)
+    identity = identifyfigure(pichudistance,pikachudistance,testpoint)
+    print(f"Sample with (width,heigh) = {testpoint} is classified as {identity}")
+print("")
 #
 # 6. Let the use input a test point. Is this part of Pickachu or Pichu? ------------
-# Ask and test input data (with default values here)
+# Ask and test input data (default values are modified here)
 #
 userwidth,userheight = askforvalue(22,35)
 # Compute distance
@@ -190,12 +218,8 @@ pichudistance,pikachudistance = \
         computedistance([pichuwidth,pichuheight],[pikachuwidth,pikachuheight],[userwidth,userheight])
 # Identify figure, is the user input Pichu or Pikachu?
 print("")
-identifyfigure(pichudistance,pikachudistance,[userwidth,userheight])
-#
-# Add user input to figure! (Was not part of Lab but I think this would be neat :) )
-#
-plt.plot(userwidth,userheight,'bo',markerfacecolor='w',label="User input")
-plt.legend()
+identity = identifyfigure(pichudistance,pikachudistance,[userwidth,userheight])
+print(f"Sample with (width,heigh) = {[userwidth,userheight]} is classified as {identity}")
 #
 # 7. Change in algorithm --------------------------------------------------------------
 #    Take 5 points that are closest to the test point and the class the majority of these belong to
@@ -203,7 +227,13 @@ plt.legend()
 # Check the user input again.
 #
 print("\nAgain with Five-nearest-method and your input sample:")
-identifyfivenearest(pichudistance,pikachudistance,[userwidth,userheight])
+identity = identifyfivenearest(pichudistance,pikachudistance,[userwidth,userheight])
+print(f"Sample with (width,heigh) = {[userwidth,userheight]} is classified as {identity}!")
+#
+# Add user input to figure! (Was not part of Lab but I think this would be neat :) )
+#
+plt.plot(userwidth,userheight,'bo',markerfacecolor='w',label="User input")
+plt.legend()
 #
 # Bonus problems --------------------------------------------------------------------
 #
@@ -222,16 +252,16 @@ rnd.shuffle(pikachuwidth),rnd.shuffle(pikachuheight)
 for nn,pichudist in enumerate(zip(pichuwidth,pichuheight)):
     # Pick five of Pichu for testdata
     if nn < 5:
-        testdata.append(f"{pichudist}:pichu".strip("(").replace(")","").replace(" ",""))
+        testdata.append(f"{pichudist}:Pichu".strip("(").replace(")","").replace(" ",""))
     # The rest in the training data
     else:
-        trainingdata.append(f"{pichudist}:pichu".strip("(").replace(")","").replace(" ",""))
+        trainingdata.append(f"{pichudist}:Pichu".strip("(").replace(")","").replace(" ",""))
 for nn,pikachudist in enumerate(zip(pikachuwidth,pikachuheight)):
     if nn < 5:
-        testdata.append(f"{pikachudist}:pikachu".strip("(").replace(")","").replace(" ",""))
+        testdata.append(f"{pikachudist}:Pikachu".strip("(").replace(")","").replace(" ",""))
     # The rest in the training data
     else:
-        trainingdata.append(f"{pikachudist}:pikachu".strip("(").replace(")","").replace(" ",""))
+        trainingdata.append(f"{pikachudist}:Pikachu".strip("(").replace(")","").replace(" ",""))
 # Randomize the training and test data
 rnd.shuffle(testdata)
 rnd.shuffle(trainingdata)
@@ -246,20 +276,15 @@ rnd.shuffle(trainingdata)
 #       nTN = number of correct Pichu-identifies
 #     Total = total number of attempts.
 #
-#Ntests = len(testdata)
-
-# To access width
-# testdata[0].split(":")[0].split(",")[0]
-# To access height
-# testdata[0].split(":")[0].split(",")[1]
-# To access identity
-# testdata[0].split(":")[1]
-
-#for data in testdata:
-    # 1. Compute distance between testdata and original data
-    # 2. Check identity and count the number of correct answers
-
-#computedistance # input: data1, data2, testdata, output: distance1,distance2
-#identifyfigure  # input: pichdist,pikdist,testdata, output: pichcount,pikcount
-#identifyfivenearest # input: pichdist,pikdist,testdata, output: pichcount,pikcount
-
+# 1. Compute accuracy for trainingdata-set
+accuracynearest,accuracyfivenear = \
+    computeaccuracies(pichuwidth,pichuheight, pikachuwidth,pikachuheight, trainingdata)
+print(f"Training data: Accuracy when using nearest-point-method: {accuracynearest}")
+print(f"Training data: Accuracy when using five-nearest-point-method: {accuracyfivenear}")
+# 2. Compute accuracy for testdata-set
+accuracynearest,accuracyfivenear = \
+    computeaccuracies(pichuwidth,pichuheight, pikachuwidth,pikachuheight, testdata)
+print(f"Test data: Accuracy when using nearest-point-method: {accuracynearest}")
+print(f"Test data: Accuracy when using five-nearest-point-method: {accuracyfivenear}")
+#
+print("\nEnd of program?")
