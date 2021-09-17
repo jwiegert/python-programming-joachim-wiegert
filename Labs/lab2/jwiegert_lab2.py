@@ -253,13 +253,14 @@ for nn in range(Npik):
 nearestcounter  = [0,0] # Counter for nearest-point-algorithm
 fivenearcounter = [0,0] # Counter for five-nearest-algorithm
 for data in testdata:
-    # Extract data from testdata/trainingdata
+    # Extract data from testdata
     testwidth    = float(data.split(":")[0].split(",")[0])
     testheight   = float(data.split(":")[0].split(",")[1])
     testidentity = data.split(":")[1]
     #
-    # Compute distance between testdata and original data
+    # Compute distance between testdata and training data
     pichudistance,pikachudistance = computedistance(trainingpichu, trainingpikachu, [testwidth,testheight])
+    #
     # Check identity and count the number of correct answers (using nearest-point-method)
     estimatedname = identifyfigure(pichudistance, pikachudistance)
     #print(f"(nearest point) Real: {testidentity} Estimated: {estimatedname}") # Troubleshoot-print
