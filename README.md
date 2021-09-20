@@ -433,6 +433,8 @@ I python funkar det då som exempel antagnignsformulär: Frågorna är:
 obj = Antagning("Cool school", "AI", "Göran Bord", False)
 ```
 
+För staticmethod, se exercise10-1!
+
 ### Good practice
 
 För functions och classes: Type checking
