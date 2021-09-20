@@ -84,6 +84,9 @@ def identifyfivenearest(pichudistance,pikachudistance):
 #
 # Define function that asks for and tests input from the user ---------------------------
 #
+
+# HÄR ÄR JAG, kolla om det finns flera saker som inte funkar här
+
 def askforvalue(defaultwidth,defaultheight):
     # Default values are one float each
     #
