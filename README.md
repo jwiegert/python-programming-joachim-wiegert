@@ -395,3 +395,40 @@ där grade är ett keyword, i det här fallet ett betyg som exempel
 Tillägnat Lab2 idag.
 
 Figur: olika färger och punkter för de olika data, plus gärna en titel och legend.
+
+# 2021-09-20
+
+Objektorienterad programmering i Python. Liknande men ändå annorlunda än i andra programmeringsspråk.
+
+Exempel, frågeformulär i klassen: I kursen tycker jag att
+
+- Intressant: Det mer pythoneska sättet att koda på, t.ex.
+
+- Svårt: att komma ihåg alla möjliga inbyggda kommandon och inte uppfinna hjulet på nytt!!
+
+Frågeformuläret i sig är ett "class", eller en "Blueprint". När den är ifylld, dvs instantierad av studenterna så är det ett objekt. Då blir det ett objekt per student. Ett "object" är ett "instances of a class".
+
+Skillnad mot t.ex. listor och dictionary är att en class är mer versatil. En class kan innehålla metoder, t.ex. ett antagningsformulär kan innehålla att den automatiskt beräknar dina poäng och förutser om du blir antagen. Man kan säga att listor, dictionary, int, float, string, alla är class'er.
+
+Exempel2: En person kan ha i ett program
+
+```py
+obj = employee()
+obj.title = "Teacher"
+obj.name  = "Kokchun"
+```
+
+Men ett annat program
+
+```py
+obj = PetOwner()
+obj.pets = ["Fish","cat","budgie"]
+```
+
+I python funkar det då som exempel antagnignsformulär: Frågorna är: 
+
+- Skola, program, namn, tackat ja?
+
+```py
+obj = Antagning("Cool school", "AI", "Göran Bord", False)
+```
