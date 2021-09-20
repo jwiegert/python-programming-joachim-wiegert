@@ -86,8 +86,10 @@ def identifyfivenearest(pichudistance,pikachudistance):
 #
 
 # HÄR ÄR JAG, kolla om det finns flera saker som inte funkar här
+# kolla så att alla variabelnamn etc fyller konventioner
+# lägga till lite förklaringar till allt?
 
-def askforvalue(defaultwidth,defaultheight):
+def askforvalue(defaultwidth,defaultheight) -> float:
     # Default values are one float each
     #
     # Ask for and check width-input.

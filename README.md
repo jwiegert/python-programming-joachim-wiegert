@@ -432,3 +432,21 @@ I python funkar det då som exempel antagnignsformulär: Frågorna är:
 ```py
 obj = Antagning("Cool school", "AI", "Göran Bord", False)
 ```
+
+### Good practice
+
+För functions och classes: Type checking
+
+Skriv ut om det förväntas float/int/str på de olika variablerna till en funktion t.ex.. Och vad som returneras är också bra att jag
+
+```py
+def function(var1: float, var2: int, namn: str) -> float/int/str:
+    # KOD HÄR
+    return blabla
+```
+
+Konvention:
+
+Class har stor bokstav i början på första och andra ordet.
+
+Variabler och funktioner har alltid små bokstäver.
