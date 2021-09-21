@@ -475,6 +475,12 @@ class AnotherClass(FirstClass):
     # Does not have method(), but can use method() from FirstClass.
 ```
 
+- Operator overloading
+
+```py
++,-,/,//,%,*,**,<,<=,> etc
+```
+
 
 
 
