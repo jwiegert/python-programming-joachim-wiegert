@@ -396,7 +396,7 @@ Tillägnat Lab2 idag.
 
 Figur: olika färger och punkter för de olika data, plus gärna en titel och legend.
 
-# 2021-09-20
+# 2021-09-20 : Objektorienterad programmering OOP
 
 Objektorienterad programmering i Python. Liknande men ändå annorlunda än i andra programmeringsspråk.
 
@@ -452,3 +452,31 @@ Konvention:
 Class har stor bokstav i början på första och andra ordet.
 
 Variabler och funktioner har alltid små bokstäver.
+
+# 2021-09-21 : polymorphism och operator overloading
+
+- Igår: OOP: Introducerade class, objects, attributes, properties (getter, setter), @-decorators, @staticmethod (för att ha error-handling o sånt som är gemensam för alla), encapsulation (underscore _ för att visa att data är privata), dunder-repper __repre__ (här lägger man meddelanden till sig själv och andra utvecklare), dunder-dict __dict__ för att komma åt class'ens attribut.
+
+- Igår: också lite good practice. Funktioner har små bokstäver, class'er har stora bokstäver i början av ord etc...
+
+- Polymorphism: "Flera former"
+
+Funktioner och operatorer som går att använda på olika sorters datatyper för olika ändamål, + operatorn kan concatenate strängar och addera siffror, len() funktionen kan mäta längden av strängar och listor. Etc.
+
+- inherit class: en class kan "ärva" attribut och metoder från en annan class.
+
+```py
+class FirstClass:
+    blabla
+    def method():
+
+class AnotherClass(FirstClass):
+    etc
+    # Does not have method(), but can use method() from FirstClass.
+```
+
+
+
+
+```py
+```
