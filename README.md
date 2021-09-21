@@ -480,7 +480,15 @@ class AnotherClass(FirstClass):
 ```py
 +,-,/,//,%,*,**,<,<=,> etc
 ```
+Med class kan man temporärt ta över en operator så att man kan använda den på en egenhändigt gjord datatyp som man definierar i sin class.
 
+T.ex. kan man göra en metod i en klass som är
+
+> def __add__(self, other):
+
+Och därefter definiera vad + ska göra med två stycken datatyper från ens class, ena är self och andra är other. T.ex. ungefär.
+
+>> return self.element + other.element
 
 
 
