@@ -166,7 +166,6 @@ plt.title("Pichu and Pikachu's widths and heights")
 
 # Due to my testdata-format I loop to extract the widths and heights.
 for ntest in range(Ntest):
-
     if ntest == 0:
         plt.plot(testdata[ntest][0],testdata[ntest][1],'yo',markerfacecolor='w',label="Testdata")
     else:
