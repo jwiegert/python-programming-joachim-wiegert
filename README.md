@@ -506,7 +506,7 @@ Apropå kommentarer och "doc-string"
 
 Är dokumentation, sammanfattning för andra utvecklare av vad t.ex. en funktion eller metod gör.
 
-Olika metoder för att overload'a operatorer: __add__, __sub__, __mul__, __div__, __pow__, etc, och så kan man ha rmul, rdic etc för att göra dem kommunikativa.
+Olika metoder för att overload'a operatorer: __add__, __sub__, __mul__, __div__, __pow__ (**), __eq__ (==) etc, och så kan man ha rmul, rdic etc för att göra dem kommunikativa.
 
 
 ```py
