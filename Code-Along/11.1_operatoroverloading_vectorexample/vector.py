@@ -1,6 +1,5 @@
 # A few vector operators
-from typing import Tuple
-
+from plotter import PlotVectors
 
 class Vector:
     # A Doc-string:
@@ -98,6 +97,15 @@ class Vector:
         
         return True
 
+    # Plotting methods
+    def plot(self, *others: "Vector") -> None:
+        # TODO: error checking
+
+        # composition-> Vector will have a PlotVectors object
+        # We need to create a plotvectors class elsewhere (in the plotter.py file)
+        # So we need to import plotvectors somewhere (in the header here)
+        plotvector = PlotVectors(self, *others)
+        plotvector.plot()
   
 
 

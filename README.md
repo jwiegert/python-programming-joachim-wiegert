@@ -490,7 +490,7 @@ Och därefter definiera vad + ska göra med två stycken datatyper från ens cla
 
 >> return self.element + other.element
 
-# 2021-09-23 OOP inheritance
+# 2021-09-23 : OOP lite mer overloading och mer inheritance
 
 Apropå kommentarer och "doc-string"
 
@@ -505,6 +505,9 @@ Apropå kommentarer och "doc-string"
 ```
 
 Är dokumentation, sammanfattning för andra utvecklare av vad t.ex. en funktion eller metod gör.
+
+Olika metoder för att overload'a operatorer: __add__, __sub__, __mul__, __div__, __pow__, etc, och så kan man ha rmul, rdic etc för att göra dem kommunikativa.
+
 
 ```py
 ```
