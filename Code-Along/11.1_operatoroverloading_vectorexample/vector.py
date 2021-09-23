@@ -8,7 +8,8 @@ class Vector:
 
     # In our init we don't know the number of dimensions of our vectors.
     # So we don't know the number of numbers here, why we add a *
-    # numbers will be a tuple
+    # numbers will be a tuple, så the user can write
+    # v1.Vector(1,2,3,4,5,6...)
     def __init__(self, *numbers) -> None:
                 
         # Do some error check
@@ -35,11 +36,32 @@ class Vector:
     # self is not necessary here but we use it to show other developers that this is a method
     # So now we have both self and other.
     def __add__(self, other: "Vector") -> "Vector":
+        """Adds two vectors of the same dimensions using the + operator"""
         if self.validatevectors(other): # Makes the error check below.
             numbers = (a+b for a,b in zip(self.numbers, other.numbers))
             # Return a vector of our style with these numbers
             # * unpacks the numbers into the Vetor class
             return Vector(*numbers)
+
+    def __sub__(self, other: "Vector") -> "Vector":
+        """Subtracts two vectors of the same dimensions using the + operator"""
+        if self.validatevectors(other): # Makes the error check below.
+            numbers = (a-b for a,b in zip(self.numbers, other.numbers))
+            # Return a vector of our style with these numbers
+            # * unpacks the numbers into the Vetor class
+            return Vector(*numbers)
+
+    # This originally only allow vector * value, not value * vector
+    # Thus we use reflective multiplication, rmul
+    def __mul__(self, value: float) -> "Vector":
+        """Multiply vector with scalar method"""
+        if not isinstance(value, (float, int)):
+            raise TypeError(f"Value must be float or int, not {type(value)}")
+        numbers = (value*a for a in self.numbers)
+        return Vector(*numbers)
+    def __rmul__(self, value: float) -> "Vector":
+        """Multiply scalar with vector method"""
+        return self*value
 
     # To check lengths of our vectors we overload the len() function also
     def __len__(self) -> int:
@@ -64,6 +86,18 @@ class Vector:
     # This will make v[n] work for our new type of data
     def __getitem__(self, item: int) -> float:
         return self.numbers[item]
+    
+    def __eq__(self, other) -> bool:
+        """Equality method, normal == won't work on our vectors here, need a new one"""
+        if not self.validatevectors(other):
+            return False
+        
+        for num1, num2 in zip(self.numbers, other.numbers):
+            if num1 != num2:
+                return False
+        
+        return True
+
   
 
 

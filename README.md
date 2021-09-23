@@ -490,7 +490,21 @@ Och därefter definiera vad + ska göra med två stycken datatyper från ens cla
 
 >> return self.element + other.element
 
+# 2021-09-23 OOP inheritance
 
+Apropå kommentarer och "doc-string"
+
+```py
+# blablabla
+```
+
+är kommentarer som är till för en själv när man skriver koden. Det är förtydliganden.
+
+```py
+""" Blablabla """
+```
+
+Är dokumentation, sammanfattning för andra utvecklare av vad t.ex. en funktion eller metod gör.
 
 ```py
 ```
