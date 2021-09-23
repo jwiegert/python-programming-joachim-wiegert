@@ -511,3 +511,9 @@ Olika metoder för att overload'a operatorer: __add__, __sub__, __mul__, __div__
 
 ```py
 ```
+
+### Flödesscheman odyl
+
+diagrams.net är bra. Det går att koppla till github. Då kan man rita enkla flödesscheman för att ge t.ex. ens chef när man vill visa hur man tänker programmera något, eller hur ens program fungerar. Kallas för UML.
+
+Apropå Parent-classes. Man kan koppla klasser men man ska vara försiktig med hur mycket man gör det. Det kan bli "parent-child-explosion", att man kopplar en lång kedja av klasser. Ändrar man något i en parent ändrar man ju då i samma sak i alla child klasses.
