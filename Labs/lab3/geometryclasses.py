@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 class GeometryChecks:
     def __init__(self) -> None:
-        pass
+        self.plotcounter = 0
     
 
     # print area
@@ -39,6 +39,7 @@ class GeometryChecks:
             title="Plot of your 2D geometry",
             xlim=[-10,10], ylim=[-10,10])
         ax.set_aspect(1)
+        self.plotcounter += 1
         ax.add_artist(plotobject)
 
 
