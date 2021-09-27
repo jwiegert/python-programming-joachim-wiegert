@@ -549,6 +549,14 @@ Se 13_privateattributes.ipynb
 
 Köra med enkel eller dubbel _? Var konsekvent.
 
+### Plotta med matplotlib
+
+Två stilar
+
+- Matlab-stil
+- OOP-approach
+
+Man kan kolla om ens funktioner/klasser är funktion eller klass om man håller inne ctrl och trycker på funktionsnamnet, då öppnar VS källkoden för funktionen. I Matplotlibs fall verkar den innehålla både vanliga funktioner men också klasser.
 
 ```py
 ```
