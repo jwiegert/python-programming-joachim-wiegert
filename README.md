@@ -508,12 +508,39 @@ Apropå kommentarer och "doc-string"
 
 Olika metoder för att overload'a operatorer: __add__, __sub__, __mul__, __div__, __pow__ (**), __eq__ (==) etc, och så kan man ha rmul, rdic etc för att göra dem kommunikativa.
 
-
-```py
-```
-
 ### Flödesscheman odyl
 
 diagrams.net är bra. Det går att koppla till github. Då kan man rita enkla flödesscheman för att ge t.ex. ens chef när man vill visa hur man tänker programmera något, eller hur ens program fungerar. Kallas för UML.
 
 Apropå Parent-classes. Man kan koppla klasser men man ska vara försiktig med hur mycket man gör det. Det kan bli "parent-child-explosion", att man kopplar en lång kedja av klasser. Ändrar man något i en parent ändrar man ju då i samma sak i alla child klasses.
+
+# 2021-09-27 : privata attribut, UML, matplotlib
+
+### Kommentar om "effektiva koder":
+
+- Börja med att skriva enkelt och ineffektivt, lös problemet.
+- Skriv om och återanvänd kod med funktioner och klasser.
+- Minska ev onödiga forloopar. Kolla över dina variabler, behöver du spara alla, eller alla listor du har etc.
+- Använd "time it" för att kolla hur lång tid olika delar tar.
+
+### OOP rep/sammanfattning
+
+Påminn: Ett objekt är en instans av en klass.
+
+- Klass: "person": +namn +ålder, och metoder, hej()
+- Objekt: p1,p2,p3: p1 = person("Greta", 21)
+
+När man skapar objektet, personen p1, så körs __init__(self, namn, ålder). Används ofta för att ge ett initialt värde till de olika parametrarna. Därför man skriver self.namn = namn.
+
+När man skriver klassen (och ritar i UMLer) så specar man först klassnamnet, attributen, och sen metoder, samt om de är publika + på UML) eller privata (- i UML).
+
+Med hjälp av properties kommer man åt privata attribut. En property har en getter och en setter. Inne i Getter och/eller setter kan man lägga koder, t.ex. felhantering.
+
+- Inkapsling
+- Docstrings & type hinting
+- Polymorphism - ad hoc polymorphism eller operator overloading.: Att en operator/funktion jobbar olika beroende på om man använder en vanlig variabel eller ett objekt från vår eget designade klass. Exempel, plus-operatorn jobbar olika beroende på om det är siffror eller strängar.
+- Arv och komposition
+
+
+```py
+```
