@@ -556,7 +556,18 @@ Två stilar
 - Matlab-stil
 - OOP-approach
 
-Man kan kolla om ens funktioner/klasser är funktion eller klass om man håller inne ctrl och trycker på funktionsnamnet, då öppnar VS källkoden för funktionen. I Matplotlibs fall verkar den innehålla både vanliga funktioner men också klasser.
+Man kan kolla om ens funktioner/klasser är funktion eller klass om man håller inne ctrl och trycker på funktionsnamnet, då öppnar VS källkoden för funktionen. I Matplotlibs fall verkar den innehålla både vanliga funktioner men också klasser (finns i pyplot.py)
+
+OOP-approachen har en del fördelar iom att man inte behöver rada upp så många properties efter varandra, bara lägga alla i objekten för sina plots eller subplots. Men för enkla plots är det bra med matlabstilen. Den kan man använda i början o sen när man renar sina koder lite kan man översätta det till objekt.
+
+### Lab3
+
+Enhetstester, i kontrast mot manuella tester som vi gjort hitills. Två approacher:
+
+- gör inte allt på en gång utan testa under kodandets gång va :)
+- sätt upp alla tester först innan man skriver koden. Tanken är att det ska fail'a varenda gång tills koden är klar. Kräver en hel del abstrakt tänkande.
+
+Tillhör iof VG-uppgifterna men det är bra att ha gjort.
 
 ```py
 ```
