@@ -541,6 +541,14 @@ Med hjälp av properties kommer man åt privata attribut. En property har en get
 - Polymorphism - ad hoc polymorphism eller operator overloading.: Att en operator/funktion jobbar olika beroende på om man använder en vanlig variabel eller ett objekt från vår eget designade klass. Exempel, plus-operatorn jobbar olika beroende på om det är siffror eller strängar.
 - Arv och komposition
 
+### Privata attribut
+
+Se 13_privateattributes.ipynb
+
+- name mangling: har man dunder på ens attribut så kör python en name mangling och ändrar namnet på attributet. Detta gör den svårare att råka ändra på attributet felaktigt.
+
+Köra med enkel eller dubbel _? Var konsekvent.
+
 
 ```py
 ```
