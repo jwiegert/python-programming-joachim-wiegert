@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 class GeometryChecks:
     def __init__(self) -> None:
-        self.plotcounter = 0
+        pass
     
 
     # print area
@@ -31,18 +31,18 @@ class GeometryChecks:
 
     # check coords inside
 
-    # TODO: fix so that it plots in the same fig, ie only creates figure once.
-
-    # Plot tool
-    def plotobject(self, plotobject:object) -> None:
-        fig,ax = plt.figure(dpi=100),plt.axes()
-        ax.grid()
-        ax.set(xlabel="x coordinates", ylabel="y coordinates",
+    # Sets settings for plots
+    # TODO: change so that settings are changed when calling this method.
+    def setplotsettings(self) -> None:
+        """Set settings for plots and plots, increases plotcounter"""
+        fig,self.ax = plt.figure(dpi=100),plt.axes()
+        self.ax.grid()
+        self.ax.set(xlabel="x coordinates", ylabel="y coordinates",
             title="Plot of your 2D geometry",
             xlim=[-10,10], ylim=[-10,10])
-        ax.set_aspect(1)
-        ax.add_artist(plotobject)
-
+        self.ax.set_aspect(1)
+        self.cmap = plt.cm.get_cmap('Spectral')
+        return fig, self.ax, self.cmap
 
     # Validate input numbers
     @staticmethod
@@ -75,6 +75,7 @@ class Circle(GeometryChecks):
         - Area: computes area
         - Circumferance: computes circumferance
         - Equality: check if the area of two circles are the same
+        - Check if a point is inside the circle
         """
         self.radius = radius
         self.origin = [originx,originy]
@@ -95,7 +96,7 @@ class Circle(GeometryChecks):
         if self.validatetype(value[0]) and self.validatetype(value[1]):
             self._origin = [value[0],value[1]]
 
-    # Compute properties
+    # Compute properties ----------------------------
     def comparea(self) -> float:
         """Compute area of the circle"""
         self.area = np.pi*self._radius**2
@@ -106,13 +107,13 @@ class Circle(GeometryChecks):
         self.circum = 2*np.pi*self._radius
         return self.circum
     
-    # Move circle
+    # Move circle ----------------------------
     def movecircle(self, xdiff:float, ydiff:float) -> None:
         """Moves origin of circle"""
         self._origin = self.translateorigin(xdiff,ydiff)
         return f"New origin is at {self._origin}"
 
-    # Check properties
+    # Check properties ----------------------------
     def __eq__(self, other) -> bool:
         """Compare the area of two circles"""
         self.area = self.comparea()
@@ -122,14 +123,28 @@ class Circle(GeometryChecks):
         else:
             return False
 
-    def checkcoords(self, input:list) -> bool:
+    def checkcoords(self, xcoord, ycoord) -> bool:
         """Check if coordinates are inside or outside circle"""
-        pass
+        # Compute euclidian distance between new point and circle origin
+        distance = np.sqrt((self._origin[0]-xcoord)**2 + (self._origin[1]-ycoord)**2)
+        # Check if this is inside the circle radius
+        if distance <= self._radius:
+            return True
+        else:
+            return False
+
+    def plotpoint(self, xcoord, ycoord) -> None:
+        ax = self.ax
+        ax.plot(xcoord, ycoord, '.', color=self.cmap(np.random.random(1)))
 
     def plotcircle(self) -> None:
-        """Plots circle"""
-        circleplot = plt.Circle( (self._origin[0],self._origin[1]), self._radius, alpha=0.7)
-        self.plotobject(circleplot)
+        """Plots object, run GeometryChecks.setplotsettings() first"""
+        ax = self.ax
+        circleplot = plt.Circle( 
+            (self._origin[0],self._origin[1]), self._radius, alpha=0.7,
+            color = self.cmap(np.random.random(1)))
+        ax.add_artist(circleplot)
+
 
         
 
