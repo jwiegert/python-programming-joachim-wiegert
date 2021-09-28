@@ -569,5 +569,16 @@ Enhetstester, i kontrast mot manuella tester som vi gjort hitills. Två approach
 
 Tillhör iof VG-uppgifterna men det är bra att ha gjort.
 
+# 2021-09-28 : Enhetstestning
+
+Finns flera bibliotek men vi använder standardbiblioteker: "unittest". Finns också "pytest" och andra men de flesta bygger på unittest. 
+
+Se Code-along/14_unitesting/
+
+
+
+
 ```py
 ```
+
+
