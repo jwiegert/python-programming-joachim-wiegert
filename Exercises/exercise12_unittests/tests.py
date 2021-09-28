@@ -13,7 +13,11 @@ class TestFrac(unittest.TestCase):
     # can use asssertEqual for most of these
 
     # 1. error messages
-
+    def test_errors(self):
+        with self.assertRaises(TypeError):
+            f1 = Frac("one","two")
+        with self.assertRaises(TypeError):
+            f1 = Frac(1.2,1.3)
 
     # 2. test simplify and mixed
     def test_mixed(self):
@@ -82,18 +86,69 @@ class TestFrac(unittest.TestCase):
         self.assertEqual(fn/fd, 3/2-2)
     
     # 6. multiply with frac and int
+    def test_multiply(self):
+        # Multiply with int
+        f1 = self.createfrac()
+        f2 = f1 * Frac(2)
+        fn = float(f2.split("/")[0])
+        fd = float(f2.split("/")[1])
+        self.assertEqual(fn/fd, 3/2*2)
+        # Multiply with int - communicative
+        f1 = self.createfrac()
+        f2 = Frac(2) * f1
+        fn = float(f2.split("/")[0])
+        fd = float(f2.split("/")[1])
+        self.assertEqual(fn/fd, 2*3/2)
 
-    # division with frac and int
+        # Multiply with frac
+        f1 = self.createfrac()
+        f2 = f1 * Frac(2,3)
+        fn = float(f2.split("/")[0])
+        fd = float(f2.split("/")[1])
+        self.assertEqual(fn/fd, 3/2*2/3)
+        # Multiply with frac - communicative
+        f1 = self.createfrac()
+        f2 = Frac(2,3) * f1
+        fn = float(f2.split("/")[0])
+        fd = float(f2.split("/")[1])
+        self.assertEqual(fn/fd, 2/3*3/2)
+    
+    # 7 division with frac and int
+    def test_divide(self):
+        # Divide with int
+        f1 = self.createfrac()
+        f2 = f1 / Frac(2)
+        fn = float(f2.split("/")[0])
+        fd = float(f2.split("/")[1])
+        self.assertEqual(fn/fd, (3/2) / 2)
+        # Divide with int - communicative
+        f1 = self.createfrac()
+        f2 = Frac(2) / f1
+        fn = float(f2.split("/")[0])
+        fd = float(f2.split("/")[1])
+        self.assertEqual(fn/fd, 2 / (3/2))
 
-    # equality of two fracs
-
-
-
-    # 
-
-
-
-    pass
+        # Divide with frac
+        f1 = self.createfrac()
+        f2 = f1 / Frac(2,3)
+        fn = float(f2.split("/")[0])
+        fd = float(f2.split("/")[1])
+        self.assertEqual(fn/fd, (3/2) / (2/3))
+        # Divide with frac - communicative
+        f1 = self.createfrac()
+        f2 = Frac(2,3) / f1
+        fn = float(f2.split("/")[0])
+        fd = float(f2.split("/")[1])
+        self.assertEqual(fn/fd, (2/3) / (3/2))
+    
+    # 8. equality of two fracs
+    def test_equality(self):
+        f1 = self.createfrac()
+        f2 = self.createfrac()
+        f3 = Frac(5)
+        f1.simplify()
+        self.assertTrue(f1 == f2)
+        self.assertFalse(f1 == f3)
 
 if __name__ == "__main__":
     unittest.main()
