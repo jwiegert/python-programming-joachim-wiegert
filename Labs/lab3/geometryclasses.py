@@ -1,6 +1,7 @@
 # Different geometry classes for lab3
 import numpy as np
 import matplotlib.pyplot as plt
+from numpy.lib.arraysetops import isin
 
 
 # ------------------------------------------------------------------------- #
@@ -53,14 +54,13 @@ class GeometryChecks:
         return value
     @staticmethod
     def validatevalue(value:float) -> float:
-        if value < 0:
-            raise ValueError(f"Value {value} must be positive, not negative")
+        if value <= 0:
+            raise ValueError(f"Value {value} must be positive, not negative or zero")
         return value
 
-
-
+    # Default repper
     def __repr__(self) -> str:
-        return f"This class is a parent to the geometry shapes and error checks the geometry"
+        return f"This class is parent to geometry shapes with general methods for all"
 
 
 # ------------------------------------------------------------------------- #
@@ -95,6 +95,9 @@ class Circle(GeometryChecks):
     def origin(self, value: list) -> None:
         if self.validatetype(value[0]) and self.validatetype(value[1]):
             self._origin = [value[0],value[1]]
+        # Bug fix: input x,y=0,0 did not create origin at all. This forces it.
+        if not hasattr(self, '_origin'):
+            self._origin = [0,0]
 
     # Compute properties ----------------------------
     def comparea(self) -> float:
@@ -115,11 +118,14 @@ class Circle(GeometryChecks):
 
     # Check properties ----------------------------
     def __eq__(self, other) -> bool:
-        """Compare the area of two circles"""
-        self.area = self.comparea()
-        other.area = other.comparea()
-        if self.area == other.area:
-            return True
+        """Compare two objects"""
+        if isinstance(other, Circle):
+            self.area = self.comparea()
+            other.area = other.comparea()
+            if self.area == other.area:
+                return True
+            else:
+                return False
         else:
             return False
 
@@ -157,11 +163,63 @@ class Circle(GeometryChecks):
 # ------------------------------------------------------------------------- #
 
 class Rectangle(GeometryChecks):
-    def __init__(self) -> None:
-        pass
+    def __init__(self, width:float, height:float, originx:float, originy:float) -> None:
+        """
+        Rectangle objects
+        -----------------
+        Inputs are width, height, and x-y coordinates of centrum.
+        Methods:
+         - Compute area
+         - Compute circumferance
+         - Check equality of rectangle with other geometric shapes
+         - Check if a point is inside or not
+        """
+        self.rsize = [width,height]
+        self.origin = [originx,originy]
+
+    @property
+    def rsize(self) -> float:
+        return self._rsize
+    @property
+    def origin(self) -> float:
+        return self._origin
+
+    @rsize.setter
+    def rsize(self, value: list) -> None:
+        if self.validatetype(value[0]) and self.validatevalue(value[0]) and\
+           self.validatetype(value[1]) and self.validatevalue(value[1]):
+            self._rsize = [value[0],value[1]]
+    @origin.setter
+    def origin(self, value: list) -> None:
+        if self.validatetype(value[0]) and self.validatetype(value[1]):
+            self._origin = [value[0],value[1]]
+        # Bug fix: input x,y=0,0 did not create origin at all. This forces it.
+        if not hasattr(self, '_origin'):
+            self._origin = [0,0]
+
+    # Compute properties ----------------------------
+    
+    # TODO: change from circle to rectangle
+    
+    def comparea(self) -> float:
+        """Compute area of the circle"""
+        self.area = np.pi*self._radius**2
+        return self.area
+    
+    def circumferance(self) -> float:
+        """Compute circumferance of a circle"""
+        self.circum = 2*np.pi*self._radius
+        return self.circum
+    
+    # Move circle ----------------------------
+    def movecircle(self, xdiff:float, ydiff:float) -> None:
+        """Moves origin of circle"""
+        self._origin = self.translateorigin(xdiff,ydiff)
+        return f"New origin is at {self._origin}"
+
 
     def __repr__(self) -> str:
-        return f"A rectangle with x-width=, y-width=, "
+        return f"A rectangle with width={self._rsize[0]}, height={self._rsize[1]}, and origin at x,y={self._origin[0]},{self._origin[1]}."
 
 
 # Cube
