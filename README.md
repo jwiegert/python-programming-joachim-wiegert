@@ -575,7 +575,15 @@ Finns flera bibliotek men vi använder standardbiblioteker: "unittest". Finns oc
 
 Se Code-along/14_unitesting/
 
+Testerna där är ganska snälla tester som kollar enkla saker. I vanliga fall vill man köra mer rigorösa tester.
 
+### Test driven development
+
+En iterativ process:
+
+Skapa testerna först, kollar om testerna fallerar, vilket de gör såklart i början för koden är inte skriven än. Så skriver man koden för att se till att testerna, ett efter ett inte ska fallera. På det viset betar man av alla tester man har gjort. Testerna blir som en checklista över vad koden ska klara av, vilket man skriver först.
+
+En annan variant är att man har olika nivåer av tester. Flera teams utvecklar olika delar till samma produkt. Varje team har sin uppsättnings tester. Sen när varje teams koder klarar alla respektive testar kopplar man ihop de olika teamens koder så har man en uppsättning integration tests.
 
 
 ```py
