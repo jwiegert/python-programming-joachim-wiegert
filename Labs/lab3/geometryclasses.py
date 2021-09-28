@@ -31,15 +31,16 @@ class GeometryChecks:
 
     # check coords inside
 
+    # TODO: fix so that it plots in the same fig, ie only creates figure once.
 
     # Plot tool
     def plotobject(self, plotobject:object) -> None:
         fig,ax = plt.figure(dpi=100),plt.axes()
-        ax.set(xlabel="x coordinates", ylabel="y coordinates", 
+        ax.grid()
+        ax.set(xlabel="x coordinates", ylabel="y coordinates",
             title="Plot of your 2D geometry",
             xlim=[-10,10], ylim=[-10,10])
         ax.set_aspect(1)
-        self.plotcounter += 1
         ax.add_artist(plotobject)
 
 
