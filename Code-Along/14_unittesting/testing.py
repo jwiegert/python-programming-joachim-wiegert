@@ -86,7 +86,47 @@ class TestVector(unittest.TestCase):
         with self.assertRaises(TypeError):
             v1 == v2
 
+    # Test extracting elements from vector
+    # 8
+    def test_getitiem(self):
+        v = self.create_2D_vec()
+        self.assertEqual(self.x, v[0])
+
+    # 9
+    # Test all elements of a 5D vector
+    def test_getitem_5Dvector(self):
+        v = Vector(1,2,3,4,5)
+        # We run this test 5 times, this is OK as long as we
+        # only test the same method in this test. It only counts
+        # as one test.
+        # You should not run several tests in the same test, as it's
+        # difficult to know what has gone wrong.
+        # But too small tests means repeating a lot of code...
+        for i in range(5):
+            self.assertEqual(i+1, v[i])
+
+    # Test operator overloads ------------------------
+    # 10
+    def test_multiply_vectorscalar(self):
+        v = self.create_2D_vec()
+        v2 = v*5
+        self.assertEqual(v2, Vector(5, 10))
+        #self.assertEqual(v2.numbers, (5, 10))
+
+    # 11
+    def test_multiply_scalarvector(self):
+        v = self.create_2D_vec()
+        v2 = 5*v
+        self.assertEqual(v2, Vector(5, 10))
+        self.assertAlmostEqual
+
+
+
 
 # To run the tests
+# dunder name gets the name __main__ when we run the script as
+# a stand alone script -> it runs the tests
+# But if we import this script in another script it will not run
+# the tests. This if statement will not be true then.
 if __name__ == "__main__":
     unittest.main()
