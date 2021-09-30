@@ -34,9 +34,6 @@ class GeometryChecks:
     def origin(self, value: list) -> None:
         if self.validatetype(value[0]) and self.validatetype(value[1]):
             self._origin = [value[0],value[1]]
-        # Bug fix: input x,y=0,0 did not create origin at all. This forces it.
-        if not hasattr(self, '_origin'):
-            self._origin = [0,0]
 
     # equality method
     def __eq__(self, other) -> bool:
@@ -76,7 +73,7 @@ class GeometryChecks:
         """Method to check input type"""
         if not isinstance(value, (int,float)):
             raise TypeError(f"Value '{value}' must be a float or int, not {type(value)}")
-        return value
+        return True
     @staticmethod
     def validatevalue(value:float) -> float:
         if value <= 0:
@@ -91,6 +88,7 @@ class GeometryChecks:
 
 class Circle(GeometryChecks):
     def __init__(self, radius:float, originx:float, originy: float) -> None:
+        # TODO: add parent methods and also add info on inputs
         """
         Circle objects
         --------------
@@ -111,6 +109,8 @@ class Circle(GeometryChecks):
     def radius(self, value: float) -> None:
         if self.validatetype(value) and self.validatevalue(value):
             self._radius = value
+        if not hasattr(self, '_radius'):
+            raise ValueError("Radius can not be zero.")
 
 
     # --------- Compute properties ---------
@@ -144,12 +144,14 @@ class Circle(GeometryChecks):
 
     # ---------- Standard repr ----------
     def __repr__(self) -> str:
+        # TODO: write so that output is in the same style as for rectangle
         return f"A circle with radius {self._radius} and middle at x={self.origin[0]} and y={self.origin[1]}"
 
 # ------------------------------------------------------------------------- #
 
 class Rectangle(GeometryChecks):
     def __init__(self, width:float, height:float, originx:float, originy:float) -> None:
+        # TODO: Add info on parent methods!
         """
         Rectangle objects
         -----------------
@@ -170,7 +172,7 @@ class Rectangle(GeometryChecks):
     @rsize.setter
     def rsize(self, value: list) -> None:
         if self.validatetype(value[0]) and self.validatevalue(value[0]) and\
-           self.validatetype(value[1]) and self.validatevalue(value[1]):
+            self.validatetype(value[1]) and self.validatevalue(value[1]):
             self._rsize = [value[0],value[1]]
 
     # --------- Compute properties ---------
@@ -206,7 +208,6 @@ class Rectangle(GeometryChecks):
     # Standard repr
     def __repr__(self) -> str:
         return f"A rectangle with width={self._rsize[0]}, height={self._rsize[1]}, and origin at x,y={self._origin[0]},{self._origin[1]}."
-
 
 # ------------------------------------------------------------------------- #
 
