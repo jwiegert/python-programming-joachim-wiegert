@@ -1,5 +1,6 @@
 # Different geometry classes for lab3
 from matplotlib.figure import Figure
+from matplotlib.patches import Patch
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy.lib.arraysetops import isin
@@ -18,16 +19,17 @@ class GeometryChecks:
         title="Plot of your 2D geometry",
         xlim=[-xmax,xmax], ylim=[-ymax,ymax])
 
+
+
     # Do I need this?
     #def __init__(self) -> None:
     #    pass
     
-    # Setter and getter for ORIGIN of object
-    # TODO: handle 3D...
+    # TODO: origin will have to handle 3D...
+    """Setter and getter for origin coordinates of object"""
     @property
     def origin(self) -> float:
         return self._origin
-
     @origin.setter
     def origin(self, value: list) -> None:
         if self.validatetype(value[0]) and self.validatetype(value[1]):
@@ -35,7 +37,6 @@ class GeometryChecks:
         # Bug fix: input x,y=0,0 did not create origin at all. This forces it.
         if not hasattr(self, '_origin'):
             self._origin = [0,0]
-
 
     # equality method
     def __eq__(self, other) -> bool:
@@ -57,39 +58,17 @@ class GeometryChecks:
         self._origin[1] += ydiff
         return self._origin
 
-
-
-    # check coords inside
-
-    """Plot a singular point in the figure"""
-    """
-    def plotpoint(self, xcoord, ycoord) -> None:
-    
-        ax = self.ax
-        ax.plot(xcoord, ycoord, '.', color=self.cmap(np.random.random(1)))"""
-
-
-    # Sets settings for plots
-    # TODO: change so that settings are changed when calling this method.
-
+    # TODO: change so that fig is not always created...
+    # TODO: Add 3D-plot method for cube and sphere
     def plotobject(self) -> Figure:
+        """Plots 2D object"""
         plotobject = self.createplotobject(GeometryChecks.cmap)
         GeometryChecks.ax.add_artist(plotobject)
 
-        
+    def plotpoint(self, xcoord, ycoord) -> None:
+        """Plot a singular point in the figure"""
+        GeometryChecks.ax.plot(xcoord, ycoord, '.', color=self.cmap(np.random.random(1)))
 
-    """Set settings for plots and plots, increases plotcounter"""
-    """
-    def setplotsettings(self) -> None:
-        
-        fig,self.ax = plt.figure(dpi=100),plt.axes()
-        self.ax.grid()
-        self.ax.set(xlabel="x coordinates", ylabel="y coordinates",
-            title="Plot of your 2D geometry",
-            xlim=[-10,10], ylim=[-10,10])
-        self.ax.set_aspect(1)
-        self.cmap = plt.cm.get_cmap('Spectral')
-        return fig, self.ax, self.cmap"""
 
     # Validate input numbers
     @staticmethod
@@ -108,7 +87,6 @@ class GeometryChecks:
     def __repr__(self) -> str:
         return f"This class is parent to geometry shapes with general methods for all"
 
-
 # ------------------------------------------------------------------------- #
 
 class Circle(GeometryChecks):
@@ -120,16 +98,15 @@ class Circle(GeometryChecks):
         Methods included here are
         - Area: computes area
         - Circumferance: computes circumferance
-        - Equality: check if the area of two circles are the same
         - Check if a point is inside the circle
         """
         self.radius = radius
         self.origin = [originx,originy]
 
+    """Setter and getter for circle radius"""
     @property
     def radius(self) -> float:
         return self._radius
-
     @radius.setter
     def radius(self, value: float) -> None:
         if self.validatetype(value) and self.validatevalue(value):
@@ -158,30 +135,16 @@ class Circle(GeometryChecks):
         else:
             return False
 
-
-    """Plots object, run GeometryChecks.setplotsettings() first"""
-    """
-    def plotcircle(self) -> None:
-        
-        ax = self.ax
-        circleplot = plt.Circle( 
-            (self._origin[0],self._origin[1]), self._radius, alpha=0.7,
-            color = self.cmap(np.random.random(1)))
-        ax.add_artist(circleplot)"""
-
-    def createplotobject(self, cmap):
+    def createplotobject(self, cmap) -> Patch:
+        """Creates pathch for parent plot method"""
         plotobject = plt.Circle( 
             (self._origin[0],self._origin[1]), self._radius, alpha=0.7,
             color = cmap(np.random.random(1)))
         return plotobject
 
-        
-
-
-    # Standard repr
+    # ---------- Standard repr ----------
     def __repr__(self) -> str:
         return f"A circle with radius {self._radius} and middle at x={self.origin[0]} and y={self.origin[1]}"
-
 
 # ------------------------------------------------------------------------- #
 
@@ -190,7 +153,8 @@ class Rectangle(GeometryChecks):
         """
         Rectangle objects
         -----------------
-        Inputs are width, height, and x-y coordinates of centrum.
+        Inputs: width:float, height:float, originx:float, originy:float
+        originx and y are coordinates of middle of rectangle
         Methods:
          - Compute area
          - Compute circumferance
@@ -199,10 +163,10 @@ class Rectangle(GeometryChecks):
         self.rsize = [width,height]
         self.origin = [originx,originy]
 
+    """Setter and getter for rectangle sizes"""
     @property
     def rsize(self) -> float:
         return self._rsize
-
     @rsize.setter
     def rsize(self, value: list) -> None:
         if self.validatetype(value[0]) and self.validatevalue(value[0]) and\
@@ -212,12 +176,12 @@ class Rectangle(GeometryChecks):
     # --------- Compute properties ---------
     def comparea(self) -> float:
         """Compute area of the rectangle"""
-        self.area = self.rsize[0] * self.rsize[1]
+        self.area = self._rsize[0] * self._rsize[1]
         return self.area
     
     def circumferance(self) -> float:
         """Compute circumferance of the rectangle"""
-        self.circum = 2*(self.rsize[0] + self.rsize[1])
+        self.circum = 2*(self._rsize[0] + self._rsize[1])
         return self.circum
     
     # --------- Check properties ---------
@@ -227,10 +191,17 @@ class Rectangle(GeometryChecks):
         xdist = abs(xcoord - self._origin[0])
         ydist = abs(ycoord - self._origin[1])
         # Check insider status
-        if xdist <= 0.5*self.rsize[0] and ydist <= 0.5*self.rsize[1]:
+        if xdist <= 0.5*self._rsize[0] and ydist <= 0.5*self._rsize[1]:
             return True
         else:
             return False
+
+    def createplotobject(self, cmap) -> Patch:
+        """Creates patch for parent plot method"""
+        anchorpoint = [orig - 0.5*rsiz for orig,rsiz in zip(self._origin,self._rsize)]
+        plotobject = plt.Rectangle(anchorpoint,self._rsize[0],self._rsize[1], 
+            alpha=0.7,color = cmap(np.random.random(1)))
+        return plotobject
 
     # Standard repr
     def __repr__(self) -> str:
