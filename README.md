@@ -585,6 +585,25 @@ Skapa testerna först, kollar om testerna fallerar, vilket de gör såklart i b�
 
 En annan variant är att man har olika nivåer av tester. Flera teams utvecklar olika delar till samma produkt. Varje team har sin uppsättnings tester. Sen när varje teams koder klarar alla respektive testar kopplar man ihop de olika teamens koder så har man en uppsättning integration tests.
 
+# 2021-09-30 : Moduler
+
+> __name__
+
+blir 
+
+> __main__ 
+
+när den körs i samma script, men om __name__ i en annan py-fil, t.ex. en med funktioner, klasser, eller andra moduler, så blir __name__ o den modulen samma som namnet på modulen (filnamn odyl). Se Code-Along/15_modules. 
+
+När man har flera moduler i paralella kataloger och andra ställen:
+
+```py
+from sys import path
+path.append('Relative path')
+import module_in_relative_path
+```
+
+Vad det innebär är ju att "path" är ens arbetskatalog. path.append lägger till en annan katalogs innehåll till arbetskatalogen så att man kan importera vad som finns där.
 
 ```py
 ```
