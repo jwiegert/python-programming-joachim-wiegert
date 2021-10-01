@@ -27,7 +27,7 @@ class TestGeometry(unittest.TestCase):
         # Create some input data
         self.testdata = [-1,0,"one"]
 
-    # ---------- Tests ----------
+    # ---------- 2D Tests ----------
     # Test input numbers
     def test_inputerrors(self):
         for data in self.testdata[:-2]:

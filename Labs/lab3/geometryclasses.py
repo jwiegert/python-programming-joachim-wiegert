@@ -56,10 +56,17 @@ class GeometryChecks:
             return False, "Objects are different classes"
 
     # Move object
-    def moveobj(self, xdiff:float, ydiff:float) -> None:
-        """Moves origin of object"""
+    def moveobj_2d(self, xdiff:float, ydiff:float) -> None:
+        """Moves origin of 2D object"""
         self._origin[0] += xdiff
         self._origin[1] += ydiff
+        return self._origin
+
+    def moveobj_3d(self, xdiff:float, ydiff:float, zdiff:float) -> None:
+        """Moves origin of 3D object"""
+        self._origin[0] += xdiff
+        self._origin[1] += ydiff
+        self._origin[2] += zdiff
         return self._origin
 
     # Plot methods
@@ -104,7 +111,7 @@ class Circle(GeometryChecks):
         - comparea(): Computes area
         - circumferance(): Computes circumferance
         - checkcoords(): Check if a point is inside the object
-        - moveobj(): Moves object's origin
+        - moveobj_2d(): Moves object's origin
         - plotobject(): Plots object
         - plotpoint(): Plots a specific point
         - == (i.e. __eq__): Equality compares object class and object area.
@@ -179,7 +186,7 @@ class Rectangle(GeometryChecks):
         - comparea(): Computes area
         - circumferance(): Computes circumferance
         - checkcoords(): Check if a point is inside the object
-        - moveobj(): Moves object's origin
+        - moveobj_2d(): Moves object's origin
         - plotobject(): Plots object
         - plotpoint(): Plots a specific point
         - == (i.e. __eq__): Equality compares object class and object area.
@@ -255,9 +262,9 @@ class Cube(GeometryChecks):
         - compvolume(): Computes volume
         - comparea(): Computes surface area
         - checkcoords(): Check if a point is inside the object
-        - moveobj(): Moves object's origin
-        - plotobject(): Plots object
-        - plotpoint(): Plots a specific point
+        - moveobj_3d(): Moves object's origin
+        - plotobject(): Plots object TODO
+        - plotpoint(): Plots a specific point TODO
         - == (i.e. __eq__): Equality compares object class and object area.
                             If both are equal it returns True. If False, it
                             returns a tuple with False at [0] and what was
@@ -277,7 +284,7 @@ class Cube(GeometryChecks):
     def side(self) -> float:
         return self._side
     @side.setter
-    def side(self, value: list) -> None:
+    def side(self, value: float) -> None:
         if self.validatetype(value) and self.validatevalue(value):
             self._side = value
 
@@ -287,41 +294,27 @@ class Cube(GeometryChecks):
         self.volume = self._side**3
         return self.volume
 
-
-
-
     def comparea(self) -> float:
-        """Compute area of the rectangle"""
-        self.area = self._rsize[0] * self._rsize[1]
+        """Compute surface area of the cube"""
+        self.area = 6 * self.side**2
         return self.area
-    
-    def circumferance(self) -> float:
-        """Compute circumferance of the rectangle"""
-        self.circum = 2*(self._rsize[0] + self._rsize[1])
-        return self.circum
-    
+   
     # --------- Check properties ---------
-    def checkcoords(self, xcoord, ycoord) -> bool:
+    def checkcoords(self, xcoord, ycoord, zcoord) -> bool:
         """Check if coordinates are inside or outside rectangle"""
         # Distances to origin
-        xdist = abs(xcoord - self._origin[0])
-        ydist = abs(ycoord - self._origin[1])
+        xdist    = abs(xcoord - self._origin[0])
+        ydist    = abs(ycoord - self._origin[1])
+        zdist    = abs(zcoord - self._origin[2])
+        halfside = 0.5*self._side
         # Check insider status
-        if xdist <= 0.5*self._rsize[0] and ydist <= 0.5*self._rsize[1]:
+        if xdist <= halfside and ydist <= halfside and zdist <= halfside:
             return True
         else:
             return False
 
-    def createplotobject(self, cmap) -> Patch:
-        """Creates patch for parent plot method"""
-        anchorpoint = [orig - 0.5*rsiz for orig,rsiz in zip(self._origin,self._rsize)]
-        plotobject = plt.Rectangle(anchorpoint,self._rsize[0],self._rsize[1], 
-            alpha=0.7,color = cmap(np.random.random(1)))
-        return plotobject
 
-
-
-
+    # Plotobjects
 
     # Standard repr
     def __repr__(self) -> str:
@@ -330,3 +323,69 @@ class Cube(GeometryChecks):
 
 
 # Sphere
+class Sphere(GeometryChecks):
+    def __init__(self, radius:float, originx:float, originy:float, originz: float) -> None:
+        """
+        Sphere objects
+        -----------------
+        - 4 inputs: radius, x, y and z coordinates of origin of objects.
+        Methods included here are:
+        - print(): Prints input coordinates and size
+        - compvolume(): Computes volume
+        - comparea(): Computes surface area
+        - checkcoords(): Check if a point is inside the object
+        - moveobj_3d(): Moves object's origin
+        - plotobject(): Plots object TODO
+        - plotpoint(): Plots a specific point TODO
+        - == (i.e. __eq__): Equality compares object class and object area.
+                            If both are equal it returns True. If False, it
+                            returns a tuple with False at [0] and what was
+                            not equal as [1]
+
+        Supplementary methods
+        ------------------
+        createplotobject(): Creates patch for the plot method
+        validatetype(): Checks that input data are int or float
+        validatevalue(): Checks that input data are positive numbers
+        """
+        self.radius = radius
+        self.origin = [originx,originy,originz]
+
+    """Setter and getter for cube size"""
+    @property
+    def radius(self) -> float:
+        return self._radius
+    @radius.setter
+    def radius(self, value: float) -> None:
+        if self.validatetype(value) and self.validatevalue(value):
+            self._radius = value
+
+    # --------- Compute properties ---------
+    def compvolume(self):
+        """Computes volume of sphere"""
+        self.volume = 4/3 * np.pi * self._radius**3
+        return self.volume
+
+    def comparea(self) -> float:
+        """Compute surface area of sphere"""
+        self.area = 4 * np.pi * self._radius**2
+        return self.area
+   
+    # --------- Check properties ---------
+    def checkcoords(self, xcoord, ycoord, zcoord) -> bool:
+        """Check if coordinates are inside or outside sphere"""
+        # Distance between new point and sphere origin
+        distance = np.sqrt((self._origin[0]-xcoord)**2 + \
+                           (self._origin[1]-ycoord)**2 + \
+                           (self._origin[1]-zcoord)**2)
+        # Check if this is inside the circle radius
+        if distance <= self._radius:
+            return True
+        else:
+            return False
+
+    # Plotobjects
+
+    # Standard repr
+    def __repr__(self) -> str:
+        return f"A sphere with radius={self._radius} and origin at x,y,z={self._origin[0]},{self._origin[1]},{self._origin[2]}."
