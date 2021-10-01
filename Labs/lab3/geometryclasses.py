@@ -1,9 +1,10 @@
 # Different geometry classes for lab3
 from matplotlib.figure import Figure
 from matplotlib.patches import Patch
-import numpy as np
+from mpl_toolkits import mplot3d
 import matplotlib.pyplot as plt
-from numpy.lib.arraysetops import isin
+import numpy as np
+#from numpy.lib.arraysetops import isin
 
 
 # ------------------------------------------------------------------------- #
@@ -17,17 +18,6 @@ class GeometryChecks:
       . GeometryChecks.Cube()
       . GeometryChecks.Sphere()
     """
-
-    # "Global" settings for plots
-    # TODO: there are some bugs here still!
-    fig,ax = plt.figure(dpi=100),plt.axes()
-    ax.grid()
-    ax.set_aspect(1)
-    cmap = plt.cm.get_cmap('Spectral')
-    xmax,ymax = 10,10
-    ax.set(xlabel="x coordinates", ylabel="y coordinates",
-        title="Plot of your 2D geometry",
-        xlim=[-xmax,xmax], ylim=[-ymax,ymax])
 
     """Setter and getter for origin coordinates of object"""
     @property
@@ -69,17 +59,65 @@ class GeometryChecks:
         self._origin[2] += zdiff
         return self._origin
 
-    # Plot methods
-    # TODO: change so that fig is not always created...
-    # TODO: Add 3D-plot method for cube and sphere
-    def plotobject(self) -> Figure:
-        """Plots 2D object"""
+    # 2D Plot methods
+    # "Global" settings for plots
+    @staticmethod
+    def plotsettings_2d(xmax:float, ymax:float):
+        """
+        Set global settings for 2D plots
+        - +/- xmax and ymax: limits for the plot axis ranges
+        """
+        # Check correct-ness of axis range limits
+        if GeometryChecks.validatetype(xmax) and GeometryChecks.validatevalue(xmax) and \
+           GeometryChecks.validatetype(ymax) and GeometryChecks.validatevalue(ymax):
+            GeometryChecks.fig,GeometryChecks.ax = plt.figure(dpi=100),plt.axes()
+            GeometryChecks.ax.grid()
+            GeometryChecks.ax.set_aspect(1)
+            GeometryChecks.cmap = plt.cm.get_cmap('Spectral')
+            GeometryChecks.ax.set(xlabel="x coordinates", ylabel="y coordinates",
+                title="2D geometrical objects",
+                xlim=[-xmax,xmax],ylim=[-ymax,ymax])
+
+    def plotobject_2d(self) -> Figure:
+        """
+        Plots 2D object
+        - Must run gc.GeometryChecks.plotsettings_2d() before plotting to get correct settings.
+        """
         plotobject = self.createplotobject(GeometryChecks.cmap)
         GeometryChecks.ax.add_artist(plotobject)
 
-    def plotpoint(self, xcoord, ycoord) -> None:
+    def plotpoint_2d(self, xcoord:float, ycoord:float) -> None:
         """Plot a singular point in the figure"""
         GeometryChecks.ax.plot(xcoord, ycoord, '.', color=self.cmap(np.random.random(1)))
+
+    # 3D Plot methods
+    @staticmethod
+    def plotsettings_3d(xmax:float, ymax:float, zmax:float):
+        """
+        Set global settings for 3D plots
+        - +/- xmax and ymax: limits for the plot axis ranges
+        """
+        # Check correct-ness of axis range limits
+        if GeometryChecks.validatetype(xmax) and GeometryChecks.validatevalue(xmax) and \
+           GeometryChecks.validatetype(ymax) and GeometryChecks.validatevalue(ymax) and \
+           GeometryChecks.validatetype(zmax) and GeometryChecks.validatevalue(zmax):
+            GeometryChecks.fig3 = plt.figure(dpi=100)
+            GeometryChecks.ax3 = plt.axes(projection = '3d')
+            GeometryChecks.ax3.grid()
+            GeometryChecks.cmap = plt.cm.get_cmap('Spectral')
+            GeometryChecks.ax3.set(
+                xlabel="x coordinates", ylabel="y coordinates", zlabel="z coordinates",
+                title="3D geometrical objects",
+                xlim=[-xmax,xmax],ylim=[-ymax,ymax],zlim=[-zmax,zmax])
+
+    # TODO: Add 3D-plot method for cube and sphere
+    def plotobject_3d(self) -> Figure:
+        pass
+    
+    def plotpoint_3d(self, xcoord:float, ycoord:float, zcoord:float) -> Figure:
+        """Plot a singular point in 3D figure"""
+        GeometryChecks.ax3.plot(xcoord, ycoord, zcoord, '.', color=self.cmap(np.random.random(1)))
+
 
     # Validate input numbers
     @staticmethod
@@ -313,8 +351,22 @@ class Cube(GeometryChecks):
         else:
             return False
 
-
     # Plotobjects
+    # TODO
+    def createplotobject(self, cmap) -> list:
+        """Creates wireframe for parent plot method"""
+        pass
+        """
+        # Use this to plot sphere!
+        u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
+        x = 5*np.cos(u)*np.sin(v) - 5
+        y = 5*np.sin(u)*np.sin(v) - 5
+        z = 5*np.cos(v)
+        gc.GeometryChecks.ax3.plot_wireframe(x, y, z, color="r")
+        """
+        #color = cmap(np.random.random(1)))
+        #return plotobject
+
 
     # Standard repr
     def __repr__(self) -> str:
