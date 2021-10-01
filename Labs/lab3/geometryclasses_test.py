@@ -76,13 +76,12 @@ class TestGeometry(unittest.TestCase):
         self.assertFalse((self.r1 == self.r3)[0]) # Rects with different area
         self.assertFalse((self.c1 == self.r1)[0]) # Different geometry classes
 
-    # Check repr
-    
+    # Check repr ?
 
-    # Check plot
+    # Check plot ?
 
+    # Test surface area and volume
         
-
 
 if __name__ == "__main__":
     unittest.main()
