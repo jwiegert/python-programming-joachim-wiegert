@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.patches import Patch
 import numpy as np
-#from numpy.lib.arraysetops import isin
-#from mpl_toolkits import mplot3d
 
 # ------------------------------------------------------------------------- #
 
@@ -92,39 +90,6 @@ class GeometryChecks:
         """Plot a singular point in the figure"""
         GeometryChecks.ax.plot(xcoord, ycoord, '.', color=self.cmap(np.random.random(1)))
 
-    # 3D Plot methods
-    @staticmethod
-    def plotsettings_3d(xmax:float, ymax:float, zmax:float):
-        """
-        Set global settings for 3D plots
-        - +/- xmax and ymax: limits for the plot axis ranges
-        """
-        # Checks correct-ness of axis range limits
-        if GeometryChecks.validatetype(xmax) and GeometryChecks.validatevalue(xmax) and \
-           GeometryChecks.validatetype(ymax) and GeometryChecks.validatevalue(ymax) and \
-           GeometryChecks.validatetype(zmax) and GeometryChecks.validatevalue(zmax):
-            GeometryChecks.fig3 = plt.figure(dpi=100)
-            GeometryChecks.ax3 = plt.axes(projection = '3d')
-            GeometryChecks.ax3.grid()
-            GeometryChecks.cmap = plt.cm.get_cmap('Spectral')
-            GeometryChecks.ax3.set(
-                xlabel="x coordinates", ylabel="y coordinates", zlabel="z coordinates",
-                title="3D geometrical objects",
-                xlim=[-xmax,xmax],ylim=[-ymax,ymax],zlim=[-zmax,zmax])
-
-    def plotobject_3d(self) -> Figure:
-        """
-        Plots 3D object as wireframe
-        - Must run gc.GeometryChecks.plotsettings_3d() before plotting to get correct settings.
-        """
-        plotobject = self.createplotobject(GeometryChecks.cmap)
-        GeometryChecks.ax3.plot_wireframe(
-            plotobject[0], plotobject[1], plotobject[2], color=plotobject[3])
-
-    def plotpoint_3d(self, xcoord:float, ycoord:float, zcoord:float) -> Figure:
-        """Plot a singular point in a 3D figure"""
-        GeometryChecks.ax3.plot(xcoord, ycoord, zcoord, '.', color=self.cmap(np.random.random(1)))
-
     # Validate input numbers
     @staticmethod
     def validatetype(value:float) -> bool:
@@ -143,6 +108,7 @@ class GeometryChecks:
         return f"This class is parent to geometry classes with general methods."
 
 # ------------------------------------------------------------------------- #
+# 2D objects
 
 class Circle(GeometryChecks):
     def __init__(self, radius:float, originx:float, originy: float) -> None:
@@ -217,7 +183,7 @@ class Circle(GeometryChecks):
     def __repr__(self) -> str:
         return f"A circle with radius {self._radius} and origin at x,y={self.origin[0]},{self.origin[1]}"
 
-# ------------------------------------------------------------------------- #
+
 
 class Rectangle(GeometryChecks):
     def __init__(self, width:float, height:float, originx:float, originy:float) -> None:
@@ -225,6 +191,7 @@ class Rectangle(GeometryChecks):
         Rectangle objects
         -----------------
         - 4 inputs: width and height, x and y coordinates of origin of objects.
+        
         Methods included here are:
         - print(): Prints input coordinates and size
         - comparea(): Computes area
@@ -238,8 +205,7 @@ class Rectangle(GeometryChecks):
                             returns a tuple with False at [0] and what was
                             not equal as [1]
 
-        Supplementary methods
-        ------------------
+        Supplementary methods:
         - createplotobject(): Creates patch for the plot method
         - validatetype(): Checks that input data are int or float
         - validatevalue(): Checks that input data are positive numbers
@@ -268,7 +234,7 @@ class Rectangle(GeometryChecks):
         self.circum = 2*(self._rsize[0] + self._rsize[1])
         return self.circum
     
-    # --------- Check properties ---------
+    # --------- Check properties and objects ---------
     def checkcoords(self, xcoord, ycoord) -> bool:
         """Check if coordinates are inside or outside rectangle"""
         # Distances to origin
@@ -281,7 +247,10 @@ class Rectangle(GeometryChecks):
             return False
 
     def createplotobject(self, cmap) -> Patch:
-        """Creates patch for parent plot method"""
+        """
+        Creates patch for parent plot method
+        - Only use plotobject_2d() to plot!
+        """
         anchorpoint = [orig - 0.5*rsiz for orig,rsiz in zip(self._origin,self._rsize)]
         plotobject = plt.Rectangle(anchorpoint,self._rsize[0],self._rsize[1], 
             alpha=0.7,color = cmap(np.random.random(1)))
@@ -290,6 +259,7 @@ class Rectangle(GeometryChecks):
     # Standard repr
     def __repr__(self) -> str:
         return f"A rectangle with width={self._rsize[0]}, height={self._rsize[1]}, and origin at x,y={self._origin[0]},{self._origin[1]}."
+
 
 # ------------------------------------------------------------------------- #
 # 3D objects
@@ -307,8 +277,6 @@ class Cube(GeometryChecks):
         - comparea(): Computes surface area
         - checkcoords(): Check if a point is inside the object
         - moveobj_3d(): Moves object's origin
-        - plotobject(): Plots object TODO
-        - plotpoint(): Plots a specific point TODO
         - == (i.e. __eq__): Equality compares object class and object area.
                             If both are equal it returns True. If False, it
                             returns a tuple with False at [0] and what was
@@ -316,7 +284,6 @@ class Cube(GeometryChecks):
 
         Supplementary methods
         ------------------
-        createplotobject(): Creates patch for the plot method
         validatetype(): Checks that input data are int or float
         validatevalue(): Checks that input data are positive numbers
         """
@@ -357,21 +324,6 @@ class Cube(GeometryChecks):
         else:
             return False
 
-    # Plotobject
-    # TODO
-    # Plotobject
-    def createplotobject(self, cmap) -> list:
-        """Creates tuple for parent plot method"""
-        # Code based on examples here
-        # https://stackoverflow.com/questions/11140163/plotting-a-3d-cube-a-sphere-and-a-vector-in-matplotlib
-        #u,v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
-        #x = self._radius*np.cos(u)*np.sin(v) + self._origin[0]
-        #y = self._radius*np.sin(u)*np.sin(v) + self._origin[1]
-        #z = self._radius*np.cos(v)           + self._origin[2]
-        plotobject = [x, y, z, cmap(np.random.random(1))]
-        return plotobject
-
-
     # Standard repr
     def __repr__(self) -> str:
         return f"A cube with side={self._side} and origin at x,y,z={self._origin[0]},{self._origin[1]},{self._origin[2]}."
@@ -391,8 +343,6 @@ class Sphere(GeometryChecks):
         - comparea(): Computes surface area
         - checkcoords(): Check if a point is inside the object
         - moveobj_3d(): Moves object's origin
-        - plotobject(): Plots object TODO
-        - plotpoint(): Plots a specific point TODO
         - == (i.e. __eq__): Equality compares object class and object area.
                             If both are equal it returns True. If False, it
                             returns a tuple with False at [0] and what was
@@ -400,7 +350,6 @@ class Sphere(GeometryChecks):
 
         Supplementary methods
         ------------------
-        createplotobject(): Creates patch for the plot method
         validatetype(): Checks that input data are int or float
         validatevalue(): Checks that input data are positive numbers
         """
@@ -433,24 +382,12 @@ class Sphere(GeometryChecks):
         # Distance between new point and sphere origin
         distance = np.sqrt((self._origin[0]-xcoord)**2 + \
                            (self._origin[1]-ycoord)**2 + \
-                           (self._origin[1]-zcoord)**2)
+                           (self._origin[2]-zcoord)**2)
         # Check if this is inside the circle radius
         if distance <= self._radius:
             return True
         else:
             return False
-
-    # Plotobject
-    def createplotobject(self, cmap) -> list:
-        """Creates tuple for parent plot method"""
-        # Code based on examples here
-        # https://stackoverflow.com/questions/11140163/plotting-a-3d-cube-a-sphere-and-a-vector-in-matplotlib
-        u,v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
-        x = self._radius*np.cos(u)*np.sin(v) + self._origin[0]
-        y = self._radius*np.sin(u)*np.sin(v) + self._origin[1]
-        z = self._radius*np.cos(v)           + self._origin[2]
-        plotobject = [x, y, z, cmap(np.random.random(1))]
-        return plotobject
 
     # Standard repr
     def __repr__(self) -> str:
