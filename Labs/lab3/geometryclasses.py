@@ -1,11 +1,13 @@
-# Different geometry classes for lab3
+# Geometry classes for lab3
+# -------------------------
+#
+# Import libraries
+import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.patches import Patch
-from mpl_toolkits import mplot3d
-import matplotlib.pyplot as plt
 import numpy as np
 #from numpy.lib.arraysetops import isin
-
+#from mpl_toolkits import mplot3d
 
 # ------------------------------------------------------------------------- #
 
@@ -46,13 +48,13 @@ class GeometryChecks:
             return False, "Objects are different classes"
 
     # Move object
-    def moveobj_2d(self, xdiff:float, ydiff:float) -> None:
+    def moveobj_2d(self, xdiff:float, ydiff:float) -> list:
         """Moves origin of 2D object"""
         self._origin[0] += xdiff
         self._origin[1] += ydiff
         return self._origin
 
-    def moveobj_3d(self, xdiff:float, ydiff:float, zdiff:float) -> None:
+    def moveobj_3d(self, xdiff:float, ydiff:float, zdiff:float) -> list:
         """Moves origin of 3D object"""
         self._origin[0] += xdiff
         self._origin[1] += ydiff
@@ -62,7 +64,7 @@ class GeometryChecks:
     # 2D Plot methods
     # "Global" settings for plots
     @staticmethod
-    def plotsettings_2d(xmax:float, ymax:float):
+    def plotsettings_2d(xmax:float, ymax:float) -> None:
         """
         Set global settings for 2D plots
         - +/- xmax and ymax: limits for the plot axis ranges
@@ -86,7 +88,7 @@ class GeometryChecks:
         plotobject = self.createplotobject(GeometryChecks.cmap)
         GeometryChecks.ax.add_artist(plotobject)
 
-    def plotpoint_2d(self, xcoord:float, ycoord:float) -> None:
+    def plotpoint_2d(self, xcoord:float, ycoord:float) -> Figure:
         """Plot a singular point in the figure"""
         GeometryChecks.ax.plot(xcoord, ycoord, '.', color=self.cmap(np.random.random(1)))
 
@@ -97,7 +99,7 @@ class GeometryChecks:
         Set global settings for 3D plots
         - +/- xmax and ymax: limits for the plot axis ranges
         """
-        # Check correct-ness of axis range limits
+        # Checks correct-ness of axis range limits
         if GeometryChecks.validatetype(xmax) and GeometryChecks.validatevalue(xmax) and \
            GeometryChecks.validatetype(ymax) and GeometryChecks.validatevalue(ymax) and \
            GeometryChecks.validatetype(zmax) and GeometryChecks.validatevalue(zmax):
@@ -110,31 +112,35 @@ class GeometryChecks:
                 title="3D geometrical objects",
                 xlim=[-xmax,xmax],ylim=[-ymax,ymax],zlim=[-zmax,zmax])
 
-    # TODO: Add 3D-plot method for cube and sphere
     def plotobject_3d(self) -> Figure:
-        pass
-    
-    def plotpoint_3d(self, xcoord:float, ycoord:float, zcoord:float) -> Figure:
-        """Plot a singular point in 3D figure"""
-        GeometryChecks.ax3.plot(xcoord, ycoord, zcoord, '.', color=self.cmap(np.random.random(1)))
+        """
+        Plots 3D object as wireframe
+        - Must run gc.GeometryChecks.plotsettings_3d() before plotting to get correct settings.
+        """
+        plotobject = self.createplotobject(GeometryChecks.cmap)
+        GeometryChecks.ax3.plot_wireframe(
+            plotobject[0], plotobject[1], plotobject[2], color=plotobject[3])
 
+    def plotpoint_3d(self, xcoord:float, ycoord:float, zcoord:float) -> Figure:
+        """Plot a singular point in a 3D figure"""
+        GeometryChecks.ax3.plot(xcoord, ycoord, zcoord, '.', color=self.cmap(np.random.random(1)))
 
     # Validate input numbers
     @staticmethod
-    def validatetype(value:float) -> float:
+    def validatetype(value:float) -> bool:
         """Method to check input type"""
         if not isinstance(value, (int,float)):
             raise TypeError(f"Value '{value}' must be a float or int, not {type(value)}")
         return True
     @staticmethod
-    def validatevalue(value:float) -> float:
+    def validatevalue(value:float) -> bool:
         if value <= 0:
             raise ValueError(f"Value {value} must be positive, not negative or zero")
-        return value
+        return True
 
     # Default repper
     def __repr__(self) -> str:
-        return f"This class is parent to geometry shapes with general methods for all"
+        return f"This class is parent to geometry classes with general methods."
 
 # ------------------------------------------------------------------------- #
 
@@ -174,9 +180,6 @@ class Circle(GeometryChecks):
     def radius(self, value: float) -> None:
         if self.validatetype(value) and self.validatevalue(value):
             self._radius = value
-        if not hasattr(self, '_radius'):
-            raise ValueError("Radius can not be zero.")
-
 
     # --------- Compute properties ---------
     def comparea(self) -> float:
@@ -201,7 +204,10 @@ class Circle(GeometryChecks):
             return False
 
     def createplotobject(self, cmap) -> Patch:
-        """Creates pathch for parent plot method"""
+        """
+        Creates patch for parent plot method
+        - Only use plotobject_2d() to plot!
+        """
         plotobject = plt.Circle( 
             (self._origin[0],self._origin[1]), self._radius, alpha=0.7,
             color = cmap(np.random.random(1)))
@@ -327,7 +333,7 @@ class Cube(GeometryChecks):
             self._side = value
 
     # --------- Compute properties ---------
-    def compvolume(self):
+    def compvolume(self) -> float:
         """Computes volume of cube"""
         self.volume = self._side**3
         return self.volume
@@ -351,21 +357,19 @@ class Cube(GeometryChecks):
         else:
             return False
 
-    # Plotobjects
+    # Plotobject
     # TODO
+    # Plotobject
     def createplotobject(self, cmap) -> list:
-        """Creates wireframe for parent plot method"""
-        pass
-        """
-        # Use this to plot sphere!
-        u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
-        x = 5*np.cos(u)*np.sin(v) - 5
-        y = 5*np.sin(u)*np.sin(v) - 5
-        z = 5*np.cos(v)
-        gc.GeometryChecks.ax3.plot_wireframe(x, y, z, color="r")
-        """
-        #color = cmap(np.random.random(1)))
-        #return plotobject
+        """Creates tuple for parent plot method"""
+        # Code based on examples here
+        # https://stackoverflow.com/questions/11140163/plotting-a-3d-cube-a-sphere-and-a-vector-in-matplotlib
+        #u,v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
+        #x = self._radius*np.cos(u)*np.sin(v) + self._origin[0]
+        #y = self._radius*np.sin(u)*np.sin(v) + self._origin[1]
+        #z = self._radius*np.cos(v)           + self._origin[2]
+        plotobject = [x, y, z, cmap(np.random.random(1))]
+        return plotobject
 
 
     # Standard repr
@@ -413,7 +417,7 @@ class Sphere(GeometryChecks):
             self._radius = value
 
     # --------- Compute properties ---------
-    def compvolume(self):
+    def compvolume(self) -> float:
         """Computes volume of sphere"""
         self.volume = 4/3 * np.pi * self._radius**3
         return self.volume
@@ -436,7 +440,17 @@ class Sphere(GeometryChecks):
         else:
             return False
 
-    # Plotobjects
+    # Plotobject
+    def createplotobject(self, cmap) -> list:
+        """Creates tuple for parent plot method"""
+        # Code based on examples here
+        # https://stackoverflow.com/questions/11140163/plotting-a-3d-cube-a-sphere-and-a-vector-in-matplotlib
+        u,v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
+        x = self._radius*np.cos(u)*np.sin(v) + self._origin[0]
+        y = self._radius*np.sin(u)*np.sin(v) + self._origin[1]
+        z = self._radius*np.cos(v)           + self._origin[2]
+        plotobject = [x, y, z, cmap(np.random.random(1))]
+        return plotobject
 
     # Standard repr
     def __repr__(self) -> str:
