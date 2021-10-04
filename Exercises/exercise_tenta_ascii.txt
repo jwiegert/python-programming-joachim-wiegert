@@ -2,20 +2,50 @@ Uppgift1
 --------
 1: Importerar matplotlib, paketet för att plotta figurer.
 3: Skapar listan x som innehåller siffrorna 0,1,2,3...9
-
-
+4: Skapar en lista y, som innehåller kvadraterna av x-listans element, 0**2, 1**2, 2**2, .. 9**2
+5: Skapar objeckten fig och ax inför plotning av figur
+6: Plotta y som funktion av x (plottar en parabel)
+7: Ändrar inställningar till plotten, titeln blir Plot, x och y-axlarna får labels x och y.
 
 
 Uppgift2
 --------
+import random as rnd
+
+Ndice = int(1e6)
+result = list(range(1,7))
+Nresults = [0 for _ in range(6)]
+
+for _ in range(Ndice):
+    for i,die in enumerate(result):
+        if rnd.randin(6) == die:
+            Nresult[i] += 1
 
 
 Uppgift3
 --------
+import numpy as np
+
+def volume_sphere(radius:float) -> float:
+    if not isinstance(radius,(int,float)):
+        raise TypeError(f"Radius must be float or int, not {type(radius)}")
+    elif radius <= 0:
+        raise ValueError("Radius can not be equal or smaller than zero")
+    # Compute volume
+    volume = 4/3 * np.pi * radius**3
+    return volume
+
 
 
 Uppgift4
 --------
+
+with open('bamba.txt') as bambafile:
+    bambalist = readlines(bambafile)
+print(bambalist)
+
+
+
 
 
 Uppgift5
