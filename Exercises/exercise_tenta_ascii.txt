@@ -1,0 +1,33 @@
+Uppgift1
+--------
+1: Importerar matplotlib, paketet för att plotta figurer.
+3: Skapar listan x som innehåller siffrorna 0,1,2,3...9
+
+
+
+
+Uppgift2
+--------
+
+
+Uppgift3
+--------
+
+
+Uppgift4
+--------
+
+
+Uppgift5
+--------
+
+
+Uppgift6
+--------
+
+
+Uppgift7
+--------
+
+
+

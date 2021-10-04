@@ -70,13 +70,13 @@ class GeometryChecks:
         # Check correct-ness of axis range limits
         if GeometryChecks.validatetype(xmax) and GeometryChecks.validatevalue(xmax) and \
            GeometryChecks.validatetype(ymax) and GeometryChecks.validatevalue(ymax):
-            GeometryChecks.fig,GeometryChecks.ax = plt.figure(dpi=100),plt.axes()
+            # Set global settings for subsequent plots
+            GeometryChecks.fig = plt.figure(dpi=100)
+            GeometryChecks.ax = plt.axes(xlabel="x coordinates", ylabel="y coordinates",
+                title="2D geometrical objects", xlim=[-xmax,xmax], ylim=[-ymax,ymax])
             GeometryChecks.ax.grid()
             GeometryChecks.ax.set_aspect(1)
             GeometryChecks.cmap = plt.cm.get_cmap('Spectral')
-            GeometryChecks.ax.set(xlabel="x coordinates", ylabel="y coordinates",
-                title="2D geometrical objects",
-                xlim=[-xmax,xmax],ylim=[-ymax,ymax])
 
     def plotobject_2d(self) -> Figure:
         """
