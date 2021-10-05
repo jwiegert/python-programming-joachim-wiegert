@@ -40,16 +40,41 @@ def volume_sphere(radius:float) -> float:
 Uppgift4
 --------
 
-with open('bamba.txt') as bambafile:
-    bambalist = readlines(bambafile)
-print(bambalist)
-
-
-
+with open('bamba.txt', 'r') as bambafile:
+    bambalist = bambafile.readlines()
+for line in bambalist:
+    print(line)
 
 
 Uppgift5
 --------
+
+import numpy as np
+
+def comp_distance(coord1,coord2):
+    x1,y1 = coord1[0],coord1[1]
+    x2,y2 = coord2[0],coord2[1]
+    distance = np.sqrt((x1-x2)**2 + (y1-y2)**2)
+
+# Test with test coordinates
+
+with open('testpoints/testpunkter.txt', 'r') as testpunktfile:
+    testpoint = testpunktfile.readlines()[1:]
+
+testdata = []
+
+for line in testpoint:
+    line = line.replace("(","").replace(")","").replace("\n","").split(",")
+    for i in range(0,len(line)-1,2):
+        testdata.append([int(line[i]),int(line[i+1])])
+
+distances = []
+
+for i in range(0,len(testdata),2):
+    distances.append(comp_distance(testdata[i],testdata[i+1]))
+print(distances
+
+
 
 
 Uppgift6
