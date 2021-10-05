@@ -19,8 +19,8 @@ class TestGeometry(unittest.TestCase):
     def setUp(self) -> None:
 
         # Create a few standard 2D objects
-        self.c1 = gc.Circle(2,1,1) # Same area as c2
-        self.c2 = gc.Circle(2,-1,-1)
+        self.c1 = gc.Circle(3,1,1) # Same area as c2
+        self.c2 = gc.Circle(3,-1,-1)
         self.c3 = gc.Circle(1,-1,0)
         self.r1 = gc.Rectangle(1,2,-3,0) # Same area as r2
         self.r2 = gc.Rectangle(2,1,3,0)
@@ -37,7 +37,7 @@ class TestGeometry(unittest.TestCase):
         # Create some input data
         self.testdata = [-1,0,"one"]
 
-    # Test input numbers
+    # Test input numbers error messages
     def test_inputerrors(self):
         for data in self.testdata[:-2]:
             with self.assertRaises(ValueError):
@@ -67,7 +67,7 @@ class TestGeometry(unittest.TestCase):
     def test_comparea(self):
         # Circle area
         area1 = self.c1.comparea()
-        area2 = 2 * np.pi * self.c1.radius
+        area2 = np.pi*self.c1.radius**2
         self.assertEqual(area1,area2)
         # Rectangle area
         area1 = self.r1.comparea()
@@ -86,7 +86,7 @@ class TestGeometry(unittest.TestCase):
     def test_compcircum(self):
         # Circle circumferance
         circ1 = self.c1.circumferance()
-        circ2 = np.pi*self.c1.radius**2
+        circ2 = 2 * np.pi * self.c1.radius
         self.assertEqual(circ1,circ2)
         # Rectangle circumferance
         circ1 = self.r1.circumferance()
@@ -121,7 +121,7 @@ class TestGeometry(unittest.TestCase):
         self.assertTrue(self.r1 == self.r2) # Rects with same area
         self.assertTrue(self.cu1 == self.cu2) # Cubes with same area
         self.assertTrue(self.s1 == self.s2) # Sphere with same area
-        # Falses are combined with a message of what is false:
+        # Falses are combined with a message of what is false, boolean is [0]
         self.assertFalse((self.c1 == self.c3)[0]) # Circles with different area
         self.assertFalse((self.r1 == self.r3)[0]) # Rects with different area
         self.assertFalse((self.cu1 == self.cu3)[0]) # Cubes with different area
