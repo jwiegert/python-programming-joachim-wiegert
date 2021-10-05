@@ -1,3 +1,15 @@
+
+Att läsa på:
+
+getter/setter, oop
+
+filhantering, syntax
+
+stränghantering, borttagande av skräp (replace, split, och den som tar bort grejer i början o slutet)
+
+
+--------------------------------------------------------------------------------
+
 Uppgift1
 --------
 1: Importerar matplotlib, paketet för att plotta figurer.
@@ -75,14 +87,13 @@ for i in range(0,len(testdata),2):
 print(distances
 
 
-
-
 Uppgift6
 --------
 
+Se ipynb-filen
 
 Uppgift7
 --------
 
-
+Se ipynb-filen
 
