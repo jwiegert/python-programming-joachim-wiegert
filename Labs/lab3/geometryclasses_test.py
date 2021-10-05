@@ -110,7 +110,7 @@ class TestGeometry(unittest.TestCase):
         self.assertTrue(self.r1.checkcoords(-3,0))
         self.assertTrue(self.cu1.checkcoords(1,2,3))
         self.assertTrue(self.s1.checkcoords(1,2,3))
-        self.assertFalse(self.c1.checkcoords(0,-1))
+        self.assertFalse(self.c1.checkcoords(0,-2))
         self.assertFalse(self.r1.checkcoords(-1,0))
         self.assertFalse(self.cu1.checkcoords(-1,0,-1))
         self.assertFalse(self.s1.checkcoords(-1,-1,0))
