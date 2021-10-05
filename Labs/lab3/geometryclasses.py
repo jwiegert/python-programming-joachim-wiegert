@@ -23,9 +23,10 @@ class GeometryChecks:
     @property
     def origin(self) -> list:
         return self._origin
-    # Origin-setter handles any number of dimensions
     @origin.setter
     def origin(self, value: list) -> None:
+        # Origin-setter handles any number of dimensions
+        # and does error handling.
         outvalue = []
         for val in value:
             if self.validatetype(val):
@@ -34,11 +35,13 @@ class GeometryChecks:
 
     # Equality method
     def __eq__(self, other) -> bool:
-        """Compares class and surface area of two objects"""
+        """
+        Compares class and surface area of two objects
+        - Inequality returns both [0]: boolean False, and [1]: string with explanation.
+        - Equality returns only boolean True.
+        """
         if type(self) == type(other):
-            self.area = self.comparea()
-            other.area = other.comparea()
-            if self.area == other.area:
+            if self.comparea() == other.comparea():
                 return True
             else:
                 return False, "Objects have different surface areas"
@@ -60,24 +63,6 @@ class GeometryChecks:
         return self._origin
 
     # 2D Plot methods
-    # "Global" settings for plots
-    @staticmethod
-    def plotsettings_2d(xmax:float, ymax:float) -> None:
-        """
-        Set global settings for 2D plots
-        - +/- xmax and ymax: limits for the plot axis ranges
-        """
-        # Check correct-ness of axis range limits
-        if GeometryChecks.validatetype(xmax) and GeometryChecks.validatevalue(xmax) and \
-           GeometryChecks.validatetype(ymax) and GeometryChecks.validatevalue(ymax):
-            # Set global settings for subsequent plots
-            GeometryChecks.fig = plt.figure(dpi=100)
-            GeometryChecks.ax = plt.axes(xlabel="x coordinates", ylabel="y coordinates",
-                title="2D geometrical objects", xlim=[-xmax,xmax], ylim=[-ymax,ymax])
-            GeometryChecks.ax.grid()
-            GeometryChecks.ax.set_aspect(1)
-            GeometryChecks.cmap = plt.cm.get_cmap('Spectral')
-
     def plotobject_2d(self) -> Figure:
         """
         Plots 2D object
@@ -90,22 +75,42 @@ class GeometryChecks:
         """Plot a singular point in the figure"""
         GeometryChecks.ax.plot(xcoord, ycoord, '.', color=self.cmap(np.random.random(1)))
 
+    # "Global" settings for plots
+    @staticmethod
+    def plotsettings_2d(xmax:float, ymax:float) -> None:
+        """
+        Set global settings for 2D plots
+        - +/- xmax and ymax: limits for the plot axis ranges
+        Required if all objects need to be plotted in the same figure.
+        """
+        # Check correct-ness of axis range limits
+        if GeometryChecks.validatetype(xmax) and GeometryChecks.validatevalue(xmax) and \
+           GeometryChecks.validatetype(ymax) and GeometryChecks.validatevalue(ymax):
+            # Set global settings for subsequent plots
+            GeometryChecks.fig = plt.figure(dpi=100)
+            GeometryChecks.ax = plt.axes(xlabel="x coordinates", ylabel="y coordinates",
+                title="2D geometrical objects", xlim=[-xmax,xmax], ylim=[-ymax,ymax])
+            GeometryChecks.ax.grid()
+            GeometryChecks.ax.set_aspect(1)
+            GeometryChecks.cmap = plt.cm.get_cmap('Spectral')
+
     # Validate input numbers
     @staticmethod
     def validatetype(value:float) -> bool:
-        """Method to check input type"""
+        """Checks input type"""
         if not isinstance(value, (int,float)):
             raise TypeError(f"Value '{value}' must be a float or int, not {type(value)}")
         return True
     @staticmethod
     def validatevalue(value:float) -> bool:
+        """Checks input data (> 0)"""
         if value <= 0:
             raise ValueError(f"Value {value} must be positive, not negative or zero")
         return True
 
     # Default repper
     def __repr__(self) -> str:
-        return f"This class is parent to geometry classes with general methods."
+        return f"This class is parent to geometry classes and contain general methods."
 
 # ------------------------------------------------------------------------- #
 # 2D objects
@@ -122,6 +127,7 @@ class Circle(GeometryChecks):
         - circumferance(): Computes circumferance
         - checkcoords(): Check if a point is inside the object
         - moveobj_2d(): Moves object's origin
+        - plotsettings_2d(): Sets global settings for plots
         - plotobject(): Plots object
         - plotpoint(): Plots a specific point
         - == (i.e. __eq__): Equality compares object class and object area.
@@ -129,7 +135,7 @@ class Circle(GeometryChecks):
                             returns a tuple with False at [0] and what was
                             not equal as [1]
 
-        Supplementary methods
+        Ancillary methods
         ------------------
         - createplotobject(): Creates patch for the plot method
         - validatetype(): Checks that input data are int or float
@@ -172,7 +178,7 @@ class Circle(GeometryChecks):
     def createplotobject(self, cmap) -> Patch:
         """
         Creates patch for parent plot method
-        - Only use plotobject_2d() to plot!
+        - Use plotobject_2d() to plot!
         """
         plotobject = plt.Circle( 
             (self._origin[0],self._origin[1]), self._radius, alpha=0.7,
@@ -198,6 +204,7 @@ class Rectangle(GeometryChecks):
         - circumferance(): Computes circumferance
         - checkcoords(): Check if a point is inside the object
         - moveobj_2d(): Moves object's origin
+        - plotsettings_2d(): Sets global settings for plots
         - plotobject(): Plots object
         - plotpoint(): Plots a specific point
         - == (i.e. __eq__): Equality compares object class and object area.
@@ -205,7 +212,7 @@ class Rectangle(GeometryChecks):
                             returns a tuple with False at [0] and what was
                             not equal as [1]
 
-        Supplementary methods:
+        Ancillary methods:
         - createplotobject(): Creates patch for the plot method
         - validatetype(): Checks that input data are int or float
         - validatevalue(): Checks that input data are positive numbers
@@ -219,7 +226,7 @@ class Rectangle(GeometryChecks):
         return self._rsize
     @rsize.setter
     def rsize(self, value: list) -> None:
-        if self.validatetype(value[0]) and self.validatevalue(value[0]) and\
+        if self.validatetype(value[0]) and self.validatevalue(value[0]) and \
             self.validatetype(value[1]) and self.validatevalue(value[1]):
             self._rsize = [value[0],value[1]]
 
@@ -249,7 +256,7 @@ class Rectangle(GeometryChecks):
     def createplotobject(self, cmap) -> Patch:
         """
         Creates patch for parent plot method
-        - Only use plotobject_2d() to plot!
+        - Use plotobject_2d() to plot!
         """
         anchorpoint = [orig - 0.5*rsiz for orig,rsiz in zip(self._origin,self._rsize)]
         plotobject = plt.Rectangle(anchorpoint,self._rsize[0],self._rsize[1], 
@@ -270,7 +277,7 @@ class Cube(GeometryChecks):
         """
         Cube objects
         -----------------
-        - 4 inputs: length of size, x, y and z coordinates of origin of objects.
+        - 4 inputs: length of side, x, y and z coordinates of origin of object.
         Methods included here are:
         - print(): Prints input coordinates and size
         - compvolume(): Computes volume
@@ -282,7 +289,7 @@ class Cube(GeometryChecks):
                             returns a tuple with False at [0] and what was
                             not equal as [1]
 
-        Supplementary methods
+        Ancillary methods
         ------------------
         validatetype(): Checks that input data are int or float
         validatevalue(): Checks that input data are positive numbers
@@ -307,7 +314,7 @@ class Cube(GeometryChecks):
 
     def comparea(self) -> float:
         """Compute surface area of the cube"""
-        self.area = 6 * self.side**2
+        self.area = 6*self.side**2
         return self.area
    
     # --------- Check properties ---------
@@ -336,7 +343,7 @@ class Sphere(GeometryChecks):
         """
         Sphere objects
         -----------------
-        - 4 inputs: radius, x, y and z coordinates of origin of objects.
+        - 4 inputs: radius and x, y and z coordinates of origin of objects.
         Methods included here are:
         - print(): Prints input coordinates and size
         - compvolume(): Computes volume
@@ -348,7 +355,7 @@ class Sphere(GeometryChecks):
                             returns a tuple with False at [0] and what was
                             not equal as [1]
 
-        Supplementary methods
+        Ancillary methods
         ------------------
         validatetype(): Checks that input data are int or float
         validatevalue(): Checks that input data are positive numbers
@@ -372,13 +379,13 @@ class Sphere(GeometryChecks):
         return self.volume
 
     def comparea(self) -> float:
-        """Compute surface area of sphere"""
+        """Computes surface area of sphere"""
         self.area = 4 * np.pi * self._radius**2
         return self.area
    
     # --------- Check properties ---------
     def checkcoords(self, xcoord, ycoord, zcoord) -> bool:
-        """Check if coordinates are inside or outside sphere"""
+        """Checks if coordinates are inside or outside sphere"""
         # Distance between new point and sphere origin
         distance = np.sqrt((self._origin[0]-xcoord)**2 + \
                            (self._origin[1]-ycoord)**2 + \
