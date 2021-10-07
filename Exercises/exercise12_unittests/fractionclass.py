@@ -29,9 +29,8 @@ class Frac:
         # Find least fitting denominator
         newnom   = self._nom*other._denom + other._nom*self._denom
         newdenom = self._denom*other._denom
-        # Create new fraction object
+        # Create new fraction object and shorten it
         newfrac = Frac(newnom,newdenom)
-        # Shorten the fraction
         newfrac.simplify()
         return newfrac
 
