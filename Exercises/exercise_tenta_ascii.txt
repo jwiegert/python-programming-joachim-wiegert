@@ -3,7 +3,9 @@ Att läsa på:
 
 getter/setter, oop
 
-filhantering, syntax
+filhantering, syntax, läsa och spara/skriva filer
+
+felhantering, raise Type/ValueError
 
 stränghantering, borttagande av skräp (replace, split, och den som tar bort grejer i början o slutet)
 
