@@ -614,4 +614,13 @@ Vad det innebär är ju att "path" är ens arbetskatalog. path.append lägger ti
 ```py
 ```
 
+# Python 3.10
 
+För att använda grejer i 3.8/3.9 från 3.10, exempel:
+
+```py
+from __future__ import annotations
+
+def foo(x: int|float) -> int|float:
+    return x
+```
