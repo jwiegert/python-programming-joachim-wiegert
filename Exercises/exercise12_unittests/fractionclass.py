@@ -9,62 +9,64 @@ class Frac:
     @property
     def denominator(self) -> int:
         return self._denom
-
     # Saves both a self._ which changes according to operator usage and the
     # original self. with no _, so that the original object is kept.
     @nominator.setter
     def nominator(self, value: int) -> None:
         if Frac.validateinput(value):
             self._nom = value
-            self.nom  = value
     @denominator.setter
     def denominator(self, value: int) -> None:
         if value == None:
             value = 1
             self._denom = value
-            self.denom  = value
         elif Frac.validateinput(value):
             self._denom = value
-            self.denom  = value
 
     # addition
     def __add__(self ,other: "Frac") -> str:
         """Adds together two fractions"""
-        if other._denom == None:
-            self.notfraction(other)
         # Find least fitting denominator
-        self._nom    = self._nom*other._denom + other._nom*self._denom
-        self._denom *= other._denom
+        newnom   = self._nom*other._denom + other._nom*self._denom
+        newdenom = self._denom*other._denom
+        # Create new fraction object
+        newfrac = Frac(newnom,newdenom)
         # Shorten the fraction
-        self.simplify()
-        return self.__str__()
+        newfrac.simplify()
+        return newfrac
 
     # subtraction
     def __sub__(self, other: "Frac") -> str:
         """Subtracts two fractions, self and other"""
         # Find least fitting denominator
-        self._nom    = self._nom*other._denom - other._nom*self._denom
-        self._denom *= other._denom
+        newnom   = self._nom*other._denom - other._nom*self._denom
+        newdenom = self._denom*other._denom
+        # Create new fraction object
+        newfrac = Frac(newnom,newdenom)
         # Shorten the fraction
-        self.simplify()
-        return self.__str__()
+        newfrac.simplify()
+        return newfrac
 
     # multiplication
     def __mul__(self, other: "Frac") -> str:
         """method to multiply two fraction"""
-        self._nom = self._nom * other._nom
-        self._denom = self._denom * other._denom
+        newnom   = self._nom * other._nom
+        newdenom = self._denom * other._denom
+        # Create new fraction object
+        newfrac = Frac(newnom,newdenom)
         # Shorten the fraction
-        self.simplify()
-        return self.__str__()
+        newfrac.simplify()
+        return newfrac
 
     # division
     def __truediv__(self, other: "Frac") -> str:
-        self._nom *= other._denom
-        self._denom *= other._nom
+        newnom   = self._nom * other._denom
+        newdenom = self._denom * other._nom
+        # Create new fraction object
+        newfrac = Frac(newnom,newdenom)
         # Shorten the fraction
-        self.simplify()
-        return self.__str__()
+        newfrac.simplify()
+        return newfrac
 
     # Equality
     def __eq__(self, other: "Frac") -> bool:
@@ -73,14 +75,6 @@ class Frac:
         else:
             return False
 
-    # Error handling
-    @staticmethod
-    def validateinput(value:int) -> int:
-        """Method to check input values"""
-        if not isinstance(value, int):
-            raise TypeError(f"Value {value} must be an int, not {type(value)}")
-        return value
-    
     # Simplify method
     def simplify(self) -> int:
         """To shorten fraction to least denominator"""
@@ -109,6 +103,14 @@ class Frac:
                 return f"{self._nom//self._denom} + {int(self._nom - self._nom//self._denom*self._denom)}/{self._denom}"
             else:
                 return f"{self._nom}/{self._denom}"
+
+    # Error handling
+    @staticmethod
+    def validateinput(value:int) -> bool:
+        """Method to check input values"""
+        if not isinstance(value, int):
+            raise TypeError(f"Value {value} must be an int, not {type(value)}")
+        return True
 
     # Normal return of this class
     def __str__(self) -> str:
