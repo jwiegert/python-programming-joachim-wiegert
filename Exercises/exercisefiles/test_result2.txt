@@ -1,0 +1,44 @@
+
+b)sorted by surname
+Björn Björnsson 39
+Emma Boden 32
+Gore Bord 55
+Bose Bosseson 32
+Sven Erik Karlsson 13
+Sven Erik Lundin 39
+Erik Eriksson 31
+Ella Ester 41
+Adam Gustafsson 25
+Håkan Håkanson 24
+Ida Håkansson 23
+Emil Johansson 23
+Johan Johansson 42
+Jonas Jonasson 31
+Jakob Kallander 65
+Hanna Karlsson 23
+Karl Karlsson 32
+Ove Karlsten 41
+Fredrika Ulven 10
+
+c) Sorted by points
+
+Grade F:
+Fredrika Ulven 10  : A
+Sven Erik Karlsson 13  : A
+Ida Håkansson 23  : A
+Emil Johansson 23  : A
+Hanna Karlsson 23  : A
+Håkan Håkanson 24  : A
+Adam Gustafsson 25  : A
+Erik Eriksson 31  : A
+Jonas Jonasson 31  : A
+Emma Boden 32  : A
+Bose Bosseson 32  : A
+Karl Karlsson 32  : A
+Björn Björnsson 39  : A
+Sven Erik Lundin 39  : A
+Ella Ester 41  : A
+Ove Karlsten 41  : A
+Johan Johansson 42  : A
+Gore Bord 55  : A
+Jakob Kallander 65  : A
