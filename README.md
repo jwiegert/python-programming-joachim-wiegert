@@ -435,6 +435,12 @@ obj = Antagning("Cool school", "AI", "Göran Bord", False)
 
 För staticmethod, se exercise10-1!
 
+Ett
+
+> @staticmethod
+
+används för metoder som inte använder sig av t.ex. self.metod(). Det är sånt som ska vara gemensamt för alla klasser som är kopplade. Felhantering är klokt att ha som staticmethods t.ex.. De har aldrig en self-input, utan bara ett eller flera "value"-inputs.
+
 ### Good practice
 
 För functions och classes: Type checking
