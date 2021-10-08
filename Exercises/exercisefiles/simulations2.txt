@@ -1,0 +1,43 @@
+Dice rolling experiment
+-----------------------
+
+Number of rolls: 10
+Number of 1: 0. Probability: 0.00
+Number of 2: 1. Probability: 0.10
+Number of 3: 1. Probability: 0.10
+Number of 4: 3. Probability: 0.30
+Number of 5: 3. Probability: 0.30
+Number of 6: 2. Probability: 0.20
+
+Number of rolls: 100
+Number of 1: 19. Probability: 0.19
+Number of 2: 11. Probability: 0.11
+Number of 3: 18. Probability: 0.18
+Number of 4: 12. Probability: 0.12
+Number of 5: 16. Probability: 0.16
+Number of 6: 24. Probability: 0.24
+
+Number of rolls: 1000
+Number of 1: 159. Probability: 0.16
+Number of 2: 182. Probability: 0.18
+Number of 3: 176. Probability: 0.18
+Number of 4: 147. Probability: 0.15
+Number of 5: 167. Probability: 0.17
+Number of 6: 169. Probability: 0.17
+
+Number of rolls: 10000
+Number of 1: 1659. Probability: 0.17
+Number of 2: 1604. Probability: 0.16
+Number of 3: 1744. Probability: 0.17
+Number of 4: 1647. Probability: 0.16
+Number of 5: 1642. Probability: 0.16
+Number of 6: 1704. Probability: 0.17
+
+Number of rolls: 100000
+Number of 1: 16397. Probability: 0.16
+Number of 2: 16654. Probability: 0.17
+Number of 3: 16638. Probability: 0.17
+Number of 4: 16710. Probability: 0.17
+Number of 5: 16708. Probability: 0.17
+Number of 6: 16893. Probability: 0.17
+

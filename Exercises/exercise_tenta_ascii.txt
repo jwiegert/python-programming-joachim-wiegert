@@ -3,17 +3,23 @@ Att läsa på:
 
 getter/setter, oop
 
-filhantering, syntax, läsa och spara/skriva filer
 
+filhantering, syntax, läsa och spara/skriva filer
 - string.split(divider) : splitar en sträng i element
 - divider.join(string): joinar element till ett med divider emellan
 - sträng.strip(tecken): tar bort alla "tecken" i ändarna av elementet
 - sträng.replace("tecken", "tecken2"): byter ut alla "tecken" mot "tecken2"
+- with open(filnamn, 'r' eller 'w' eller 'a') as filobject:
+
+
+regular expressions
+
 
 
 felhantering, raise Type/ValueError
 
-stränghantering, borttagande av skräp (replace, split, och den som tar bort grejer i början o slutet)
+
+
 
 
 --------------------------------------------------------------------------------
