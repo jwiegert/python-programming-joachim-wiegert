@@ -23,22 +23,22 @@ Fredrika Ulven 10
 c) Sorted by points
 
 Grade F:
-Fredrika Ulven 10  : A
-Sven Erik Karlsson 13  : A
-Ida Håkansson 23  : A
-Emil Johansson 23  : A
-Hanna Karlsson 23  : A
-Håkan Håkanson 24  : A
-Adam Gustafsson 25  : A
-Erik Eriksson 31  : A
-Jonas Jonasson 31  : A
-Emma Boden 32  : A
-Bose Bosseson 32  : A
-Karl Karlsson 32  : A
-Björn Björnsson 39  : A
-Sven Erik Lundin 39  : A
-Ella Ester 41  : A
-Ove Karlsten 41  : A
-Johan Johansson 42  : A
-Gore Bord 55  : A
+Fredrika Ulven 10  : F
+Sven Erik Karlsson 13  : F
+Ida Håkansson 23  : E
+Emil Johansson 23  : E
+Hanna Karlsson 23  : E
+Håkan Håkanson 24  : E
+Adam Gustafsson 25  : E
+Erik Eriksson 31  : D
+Jonas Jonasson 31  : D
+Emma Boden 32  : D
+Bose Bosseson 32  : D
+Karl Karlsson 32  : D
+Björn Björnsson 39  : D
+Sven Erik Lundin 39  : D
+Ella Ester 41  : C
+Ove Karlsten 41  : C
+Johan Johansson 42  : C
+Gore Bord 55  : B
 Jakob Kallander 65  : A
