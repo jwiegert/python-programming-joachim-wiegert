@@ -611,9 +611,6 @@ import module_in_relative_path
 
 Vad det innebär är ju att "path" är ens arbetskatalog. path.append lägger till en annan katalogs innehåll till arbetskatalogen så att man kan importera vad som finns där.
 
-```py
-```
-
 # Python 3.10
 
 För att använda grejer i 3.8/3.9 från 3.10, exempel:
@@ -623,4 +620,16 @@ from __future__ import annotations
 
 def foo(x: int|float) -> int|float:
     return x
+```
+
+# 2021-10-11
+
+Mer avancerat att fördjupa sig med.
+
+> Beyond the basic stuff with Python: Best practices for writing clean code
+> Al Sweigart
+
+
+
+```py
 ```
