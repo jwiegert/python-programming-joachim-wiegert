@@ -2,9 +2,24 @@
 Att läsa på:
 
 getter/setter, oop
+- används för att sätta hemliga/privata attribut, kan också passa
+  på att köra felhantering där i.
+
+# Getter måste vara först, för att definiera funktionen med
+# attributnamnet! Annars fungerar inte settern (vilket är en
+# dekorator).
+# Getter: Definierar funktion av attributet till settern
+@property
+def attrname(self) -> return-type:
+    return self._attrname
+# Setter:
+@attrname.setter
+def attrname(self, value):
+    ERRORCHECKS
+        self._attrname = value
 
 
-filhantering, syntax, läsa och spara/skriva filer
+filhantering, syntax, läsa och spara/skriva filer  DONE
 - string.split(divider) : splitar en sträng i element
 - divider.join(string): joinar element till ett med divider emellan
 - sträng.strip(tecken): tar bort alla "tecken" i ändarna av elementet
@@ -13,11 +28,36 @@ filhantering, syntax, läsa och spara/skriva filer
 
 
 regular expressions
+- flera steg
+1. import re 
+2. olika funktioner sen. T.ex.
+re.findall(info,sträng) - extraherar all info från sträng
+re.search - ger true om en söksträng finns i strängen
+re.split - splittar strängen i det man söker på
+3. olika re
+[] - range: [A-F] ger ABCDEF, [a-f] med små bokstädr, [1-9] etc
+\d är digits, \d\d dubbeldigits etc
+{} antal gånger föregående ska förekomma, l{3}, letar efter lll
 
 
+felhantering, raise Type/ValueError   DONE
+- Exempel
+Funktioner för att kolla kolla att värden är en viss typ
+if not isinstance(value, str eller (float,int)):
+    raise TypeError("Fel typ!")
+else:
+    return True
+Eller att värdena är inom en viss range
+if 0 <= value <= 100:
+    return True
+else:
+    raise ValueError("value måste vara mellan 0 och 100!")
 
-felhantering, raise Type/ValueError
-
+För att testa utan kaos-fel och stopp
+try:
+    errorunktion(input):
+except Value/TypeError as err:
+    print(err)
 
 
 

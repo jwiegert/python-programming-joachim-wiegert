@@ -3,14 +3,14 @@ class Frac:
         self.nominator   = nominator
         self.denominator = denominator
     
+    # Getters
     @property
     def nominator(self) -> int:
         return self._nom
     @property
     def denominator(self) -> int:
         return self._denom
-    # Saves both a self._ which changes according to operator usage and the
-    # original self. with no _, so that the original object is kept.
+    # Setters and error checks
     @nominator.setter
     def nominator(self, value: int) -> None:
         if Frac.validateinput(value):
