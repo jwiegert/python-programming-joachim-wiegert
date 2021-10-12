@@ -24,6 +24,9 @@ filhantering, syntax, läsa och spara/skriva filer  DONE
 - divider.join(string): joinar element till ett med divider emellan
 - sträng.strip(tecken): tar bort alla "tecken" i ändarna av elementet
 - sträng.replace("tecken", "tecken2"): byter ut alla "tecken" mot "tecken2"
+- eval("Sträng"): kan plocka ut och göra tuple av vad som finns i strängar med data
+  t.ex., eval("(2,3)") ger tuple (2,3), går att göra om till lista med
+  list(eval("(2,3)"), eval gör om strängen till kod.
 - with open(filnamn, 'r' eller 'w' eller 'a') as filobject:
 
 
@@ -60,6 +63,22 @@ except Value/TypeError as err:
     print(err)
 
 
+Anonyma funktioner, lambda expressions:
+- Syntax:
+lambda : function(utan input)
+lambda x: function(x)
+lambda x, y: function(x,y)
+
+- Anonym function med namn:
+func = lambda x: function(x)
+> func(2) -> function(x=2)
+
+- Sortering med lambdaexp
+listname = ["Förnamn efternamn1", "Förnamn efternamn2", "Förnamn efternamn3"]
+
+listname.sort(key=lambda name: name.split(" ")[-1].lower())
+name.split delar upp för och efternamn av varje element (som vi kallar name) i listname
+[-1] tar efternamnet, lower() ser till att den ser alla orden i små bokstäver ifall nån skriver skumt och glömmer shift etc.
 
 
 --------------------------------------------------------------------------------
