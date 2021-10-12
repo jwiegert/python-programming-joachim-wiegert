@@ -81,6 +81,30 @@ name.split delar upp för och efternamn av varje element (som vi kallar name) i 
 [-1] tar efternamnet, lower() ser till att den ser alla orden i små bokstäver ifall nån skriver skumt och glömmer shift etc.
 
 
+Dictionary:
+-syntax
+data = {"key1":data1, "key2":data2}
+  data kan vara strängar eller siffror
+  key kan också vara både strängar eller data?
+  data["key1"] -> data1
+Man kan addera data till dict med att bara skapa nya keys med []:
+data["key3"] = data3
+
+Kan också skriva
+> data = dict(key1="datasträng", key2=4234972)
+Då har man inte "" runt key
+
+Man kan loopa genom dictionaryes med key-method
+for key in data.key():
+    value = post[key]
+
+Och items-method
+for key, value in data.items():
+
+
+
+
+
 --------------------------------------------------------------------------------
 
 Uppgift1
