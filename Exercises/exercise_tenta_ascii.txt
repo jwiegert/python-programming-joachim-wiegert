@@ -28,6 +28,11 @@ filhantering, syntax, läsa och spara/skriva filer  DONE
   t.ex., eval("(2,3)") ger tuple (2,3), går att göra om till lista med
   list(eval("(2,3)"), eval gör om strängen till kod.
 - with open(filnamn, 'r' eller 'w' eller 'a') as filobject:
+      data = filobject.read()
+    eller
+      data = filobject.readlines()  # Delar upp rader i element
+    och för att springa
+      filobject.write("blabla"), \n för ny rad etc
 
 
 regular expressions
@@ -61,6 +66,25 @@ try:
     errorunktion(input):
 except Value/TypeError as err:
     print(err)
+
+Man kan ha flera except-koder under en try:
+try:
+    # Runs first
+    CODE
+except:
+    # Runs if exception occurs in try block, and it fits with error here
+    CODE
+except:
+    # Runs if exception occurs in try block, and it fits with error here
+    CODE
+else:
+    # Runs if try succeeds
+    CODE
+finally:
+    # Will always run
+    CODE
+
+
 
 
 Anonyma funktioner, lambda expressions:
@@ -100,6 +124,36 @@ for key in data.key():
 
 Och items-method
 for key, value in data.items():
+
+
+MÄTA TID
+>
+import time
+
+start_time = time.time() # Counter starts, clock is ticking
+CODES!
+
+stop_time = time.time() # stops clock
+total_time = stop_time - start_time # total ellapsed time
+
+
+GÖRA LOGFILER
+>
+import logging
+
+#create logger
+logging.basicConfig(filename = "hyperlink/filename.log", level = logging.DEBUG)
+
+# exemple
+try:
+    CODE
+except ERROR as err:
+    logger.error(err) # writes error to log file
+# Save time elapsed (see above, same variable)
+finally:
+    # stop clock, save time as total_time
+    logger.info("Time elapsed = {time}".format(time=total_time))
+
 
 
 
