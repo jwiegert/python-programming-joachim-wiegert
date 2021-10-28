@@ -629,7 +629,25 @@ Mer avancerat att fördjupa sig med.
 > Beyond the basic stuff with Python: Best practices for writing clean code
 > Al Sweigart
 
+# 2021-10-18 : Påminn
 
+- skapa ny repo:
 
-```py
-```
+> github: create repository
+> git clone http....
+
+(Inte tvärtom, inte skapa katalogen först, jag kan inte ha en katalog med samma namn redan :P )
+
+# 2021-10-28 : Feedback på lab3
+
+Tips:
+
+* variabelnamn, funktionsnamn -> använd understreck för nytt ord
+
+* if ... else strukturer i metoder kan du skriva om med en return
+
+* ex return distance <= self._radius då uttrycket evalueras till antingen True eller False
+
+* liknande tester kan du använda loop i kombination med subtest
+
+* se över långa if-satser med många villkor om det går att refaktorera på något vis 
