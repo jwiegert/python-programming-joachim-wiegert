@@ -1,8 +1,16 @@
 # Python-programming-course
 
-Repository for problems, labs, and assigments for courses in Python programming.
+Repo för kurs i Pythonprogrammering. Allt från grunder, funktioner och moduler till Objektorienterad programmering.
 
-# Lecture notes
+# Föreläsningsanteckningar
+
+De första föreläsningsanteckningarna är ofullkomliga då de är från innan Github-repo't skapades. Det mesta är dessutom på svenska. Koderna är på engelska. De första koderna (utan anteckningar här) är följande:
+
+- [Input/Output och variabler](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/00_IO_variables.ipynb)
+
+- [If-satser](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/01_if_statements.ipynb)
+
+- [While-loopar](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/02_while_statements.ipynb)
 
 ## 2021-08-24
 
@@ -78,6 +86,8 @@ I pipfile, under packages, står versionsnamn till höger, står det t.ex. numpy
 
 ## 2021-08-31 : Om for-loops.
 
+[Föreläsningskod](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/03_for_statements.ipynb)
+
 - "for each" loop, loopar igenom varje element i en lista.
 - I en del andra språk kan det vara t.ex.
     for (int = 0; i<=10; i++)
@@ -89,6 +99,8 @@ I pipfile, under packages, står versionsnamn till höger, står det t.ex. numpy
 - range(2,15,3) kommer ge i = 2, 5, 8, 11, 14.
 
 ## 2021-09-02 : Om lists.
+
+[Föreläsningskod](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/04_lists.ipynb)
 
 I en lista i Python kan man lägga in nästan vad som helst, strängar, ints, floats.
 
@@ -111,6 +123,8 @@ List comprehenion: Svart magi för att formulera listor på en enda rad iställe
 if-satser får man också ha med.
 
 ## 2021-09-06 : strings
+
+[Föreläsningskod](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/05_strings.ipynb)
 
 - Googla på "string methods in python" så hittas en massa kommandon man kan använda för strängar: https://www.w3schools.com/python/python_ref_string.asp
 
@@ -196,6 +210,8 @@ Eller googla lite efter t.ex. "find phone numbers with python regular expression
 
 # 2021-09-07 : funktioner bl.a.
 
+[Föreläsningskod](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/06_functions.ipynb)
+
 Samt "kod i discord" och intro till lab2.
 
 - om man vill skriva kod i discord så att det blir snyggt formaterat:
@@ -275,6 +291,8 @@ Man kan ha en lambda-funktion i en funktion. Då blir syntaxen att man anropar e
 
 # 2021-09-09 : felhantering/error handling
 
+[Föreläsningskod](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/07_errorhandling.ipynb)
+
 Feltyper
 
 - syntax error: syntaxfel alltså, python förstår inte koden.
@@ -302,6 +320,8 @@ Detta till skillnad från att sätta upp en massa if-satser som försöker föru
 Detta ska användas i lab2!
 
 # 2021-09-13 Filhantering
+
+[Föreläsningskod](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/08_filemanagement.ipynb)
 
 (Dagens föreläsning använder filerna i Code-Along/files/)
 
@@ -368,6 +388,8 @@ set([4,4,4,1,1,1,2,3,4]) == [4,1,2,3]
 
 # 2021-09-14 Dictionary
 
+[Föreläsningskod](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/09_dictionary.ipynb)
+
 Verktyg för att organisera data. Består av "key:value pair". Man har någon nyckel och får ut något värde. Baseras på datastrukturer och går väldigt snabbt att använda (prestanda: O(1)). Man sätter alltså upp en uppsättning key-words och assign'ar data till dem, listor, strängar etc, vad man vill. Går att anropa sen:
 
 > dictionaryname['dictionarykeyword']
@@ -392,11 +414,13 @@ där grade är ett keyword, i det här fallet ett betyg som exempel
 
 # 2021-09-16
 
-Tillägnat Lab2 idag.
+Tillägnat [Lab2](https://github.com/jwiegert/python-programming-joachim-wiegert/tree/main/Labs/lab2) idag.
 
 Figur: olika färger och punkter för de olika data, plus gärna en titel och legend.
 
 # 2021-09-20 : Objektorienterad programmering OOP
+
+[Föreläsningskod](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/10_objectorpr.ipynb)
 
 Objektorienterad programmering i Python. Liknande men ändå annorlunda än i andra programmeringsspråk.
 
@@ -461,6 +485,8 @@ Variabler och funktioner har alltid små bokstäver.
 
 # 2021-09-21 : polymorphism och operator overloading
 
+[Föreläsningskoder](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/11_OOP_polymorphism.ipynb)
+
 - Igår: OOP: Introducerade class, objects, attributes, properties (getter, setter), @-decorators, @staticmethod (för att ha error-handling o sånt som är gemensam för alla), encapsulation (underscore _ för att visa att data är privata), dunder-repper __repre__ (här lägger man meddelanden till sig själv och andra utvecklare), dunder-dict __dict__ för att komma åt class'ens attribut.
 
 - Igår: också lite good practice. Funktioner har små bokstäver, class'er har stora bokstäver i början av ord etc...
@@ -490,13 +516,19 @@ Med class kan man temporärt ta över en operator så att man kan använda den p
 
 T.ex. kan man göra en metod i en klass som är
 
-> def __add__(self, other):
+```py
+def __add__(self, other):
+```
 
 Och därefter definiera vad + ska göra med två stycken datatyper från ens class, ena är self och andra är other. T.ex. ungefär.
 
->> return self.element + other.element
+```py
+return self.element + other.element
+```
 
 # 2021-09-23 : OOP lite mer overloading och mer inheritance
+
+[Föreläsningskod](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/12_inheritance.ipynb)
 
 Apropå kommentarer och "doc-string"
 
@@ -516,7 +548,7 @@ Olika metoder för att overload'a operatorer: __add__, __sub__, __mul__, __div__
 
 ### Flödesscheman odyl
 
-diagrams.net är bra. Det går att koppla till github. Då kan man rita enkla flödesscheman för att ge t.ex. ens chef när man vill visa hur man tänker programmera något, eller hur ens program fungerar. Kallas för UML.
+[diagrams.net](diagrams.net) är ett alternativ. Det går att koppla till github. Då kan man rita enkla flödesscheman för att ge t.ex. ens chef när man vill visa hur man tänker programmera något, eller hur ens program fungerar. Kallas för UML.
 
 Apropå Parent-classes. Man kan koppla klasser men man ska vara försiktig med hur mycket man gör det. Det kan bli "parent-child-explosion", att man kopplar en lång kedja av klasser. Ändrar man något i en parent ändrar man ju då i samma sak i alla child klasses.
 
@@ -547,7 +579,7 @@ Med hjälp av properties kommer man åt privata attribut. En property har en get
 - Polymorphism - ad hoc polymorphism eller operator overloading.: Att en operator/funktion jobbar olika beroende på om man använder en vanlig variabel eller ett objekt från vår eget designade klass. Exempel, plus-operatorn jobbar olika beroende på om det är siffror eller strängar.
 - Arv och komposition
 
-### Privata attribut
+### Privata attribut: [Kod](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/13.1_privateattributes.ipynb)
 
 Se 13_privateattributes.ipynb
 
@@ -555,7 +587,7 @@ Se 13_privateattributes.ipynb
 
 Köra med enkel eller dubbel _? Var konsekvent.
 
-### Plotta med matplotlib
+### Plotta med matplotlib: [Kod](https://github.com/jwiegert/python-programming-joachim-wiegert/blob/main/Code-Along/13.2_matplotlibplotting.ipynb)
 
 Två stilar
 
@@ -566,7 +598,7 @@ Man kan kolla om ens funktioner/klasser är funktion eller klass om man håller 
 
 OOP-approachen har en del fördelar iom att man inte behöver rada upp så många properties efter varandra, bara lägga alla i objekten för sina plots eller subplots. Men för enkla plots är det bra med matlabstilen. Den kan man använda i början o sen när man renar sina koder lite kan man översätta det till objekt.
 
-### Lab3
+### Lab3: [Labkoder](https://github.com/jwiegert/python-programming-joachim-wiegert/tree/main/Labs/lab3)
 
 Enhetstester, i kontrast mot manuella tester som vi gjort hitills. Två approacher:
 
@@ -576,6 +608,8 @@ Enhetstester, i kontrast mot manuella tester som vi gjort hitills. Två approach
 Tillhör iof VG-uppgifterna men det är bra att ha gjort.
 
 # 2021-09-28 : Enhetstestning
+
+[Föreläsningskoder](https://github.com/jwiegert/python-programming-joachim-wiegert/tree/main/Code-Along/14_unittesting)
 
 Finns flera bibliotek men vi använder standardbiblioteker: "unittest". Finns också "pytest" och andra men de flesta bygger på unittest. 
 
@@ -592,6 +626,8 @@ Skapa testerna först, kollar om testerna fallerar, vilket de gör såklart i b�
 En annan variant är att man har olika nivåer av tester. Flera teams utvecklar olika delar till samma produkt. Varje team har sin uppsättnings tester. Sen när varje teams koder klarar alla respektive testar kopplar man ihop de olika teamens koder så har man en uppsättning integration tests.
 
 # 2021-09-30 : Moduler
+
+[Föreläsningskoder](https://github.com/jwiegert/python-programming-joachim-wiegert/tree/main/Code-Along/15_modules)
 
 > __name__
 
